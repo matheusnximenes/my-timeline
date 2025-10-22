@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///turbopack:///[project]/src/components/timeline/parts/Users/matheusximenes/bible-timeline/src/components/timeline/parts/baseline.module.scss"],"sourcesContent":[".baseline {\n  display: flex;\n  border-top: 1px solid white;\n  flex-basis: 100%;\n}\n\n.year {\n  position: relative;\n  width: 1px;\n  overflow: visible;\n  white-space: nowrap;\n\n  &::after {\n    content: \" \";\n    position: absolute;\n    background-color: white;\n    width: 8px;\n    height: 8px;\n    top: -3px;\n    left: -3px;\n    border-radius: 4px;\n  }\n\n  &::before {\n    content: \" \";\n    border-left: 1px solid white;\n  }\n}\n\n.year_text {\n  position: relative;\n  top: 24px;\n  left: -16px;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;;;;AAME;;;;;;;;;;;AAWA;;;;;AAMF"}}]
-}

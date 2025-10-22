@@ -1,0 +1,16 @@
+# Don't check auto-generated stuff into git
+coverage
+build
+dist
+node_modules
+
+#next
+_next/
+.next
+next-env.d.ts
+analyze
+
+#environment variables
+.env
+.env.local
+.env.*.local

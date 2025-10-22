@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///turbopack:///[project]/src/components/timeline/parts/Users/matheusximenes/bible-timeline/src/components/timeline/parts/labels.module.scss"],"sourcesContent":[".labels {\n  margin-top: 50px;\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  list-style-type: none;\n  border: 1px solid red;\n\n  li {\n    margin: 10px;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AAQE"}}]
-}

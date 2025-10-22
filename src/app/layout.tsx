@@ -1,33 +1,27 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { StateProvider } from "@/providers/StateProvider";
-import "./globals.css";
+import { StateProvider } from '@/providers/StateProvider'
+import { Noto_Sans } from 'next/font/google'
+import './globals.css'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const noto_sans = Noto_Sans({
+	weight: ['400', '700'], // Specify desired weights
+	subsets: ['latin'] // Specify desired subsets
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Bible Timeline",
-  description: "jw.org - Jehovah’s Witnesses",
-};
+// export const metadata: Metadata = {
+// 	title: 'Bible Timeline',
+// 	description: 'jw.org - Jehovah’s Witnesses'
+// }
 
 export default function RootLayout({
-  children,
+	children
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <StateProvider>{children}</StateProvider>
-      </body>
-    </html>
-  );
+	return (
+		<html lang='en'>
+			<body className={`${noto_sans.className}`}>
+				<StateProvider>{children}</StateProvider>
+			</body>
+		</html>
+	)
 }

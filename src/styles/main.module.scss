@@ -1,47 +1,59 @@
-// Root container to fill viewport
 .root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+	height: 100vh;
+	width: 100vw;
+	// border: 1px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
-.header {
-  display: flex;
-  background-color: black;
-  align-items: center;
-  flex-shrink: 0; // Prevent header from shrinking
+	.header {
+		border: 1px solid yellow;
+		height: 5%;
+	}
 
-  img {
-    width: 80px;
-  }
-}
+	.content {
+		border: 1px solid orange;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		height: 88%;
+	}
 
-.content {
-  display: flex;
-  flex: 1; // Take up remaining space
-  min-height: 0; // Allow content to shrink below its natural size
-}
+	.main {
+		border: 1px solid red;
+		width: 100%;
 
-.aside {
-  // background-color: azure;
-  flex-shrink: 0; // Prevent sidebar from shrinking
-  display: none;
-}
+		&.active_aside {
+			width: 75%;
+		}
 
-.main {
-  // background-color: white;
-  flex: 1; // Take up remaining horizontal space
-  overflow: auto;
-  padding: 20px 40px;
-}
+		.title {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 10%;
+			border: 1px solid white;
+		}
+		.timeline {
+			height: 90%;
+			border: 1px solid red;
+			overflow: auto;
+		}
+	}
 
-.title {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-}
+	.aside {
+		border: 1px solid blue;
+		display: none;
 
-.footer {
-  background-color: blueviolet;
-  flex-shrink: 0; // Prevent footer from shrinking
+		&.active_aside {
+			width: 25%;
+		}
+	}
+
+	.footer {
+		background-color: #121212;
+		height: 7%;
+		display: flex;
+		justify-items: center;
+	}
 }

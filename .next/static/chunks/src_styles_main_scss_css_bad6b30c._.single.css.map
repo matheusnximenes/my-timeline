@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///turbopack:///[project]/src/styles/Users/matheusximenes/bible-timeline/src/styles/main.scss"],"sourcesContent":["// Root container to fill viewport\n.root {\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n}\n\n.header {\n  display: flex;\n  background-color: black;\n  align-items: center;\n  flex-shrink: 0; // Prevent header from shrinking\n\n  img {\n    width: 80px;\n  }\n}\n\n.content {\n  display: flex;\n  flex: 1; // Take up remaining space\n  min-height: 0; // Allow content to shrink below its natural size\n}\n\n.aside {\n  // background-color: azure;\n  flex-shrink: 0; // Prevent sidebar from shrinking\n  display: none;\n}\n\n.main {\n  // background-color: white;\n  flex: 1; // Take up remaining horizontal space\n  overflow: auto;\n  padding: 20px 40px;\n}\n\n.title {\n  position: absolute;\n  width: 100%;\n  text-align: center;\n}\n\n.footer {\n  background-color: blueviolet;\n  flex-shrink: 0; // Prevent footer from shrinking\n}\n"],"names":[],"mappings":"AACA;;;;;;AAMA;;;;;;;AAME;;;;AAKF;;;;;;AAMA;;;;;AAMA;;;;;;AAOA;;;;;;AAMA"}}]
-}

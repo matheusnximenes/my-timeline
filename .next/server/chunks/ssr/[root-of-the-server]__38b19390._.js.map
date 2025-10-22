@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///Users/matheusximenes/bible-timeline/src/app/page.tsx"],"sourcesContent":["import styles from \"../styles/main.module.css\";\n\nexport default function Home() {\n  return (\n    <>\n      <header className={styles.header}>Header</header>\n      <div className={styles.content}>\n        <aside className={styles.aside}>drawer</aside>\n        <main className={styles.main}>Chart</main>\n      </div>\n      <footer className={styles.footer}>Footer</footer>\n    </>\n  );\n}\n"],"names":[],"mappings":";;;;;;;;;;;;AAEe,SAAS;IACtB,qBACE;;0BACE,8OAAC;gBAAO,WAAW,OAAO,MAAM;0BAAE;;;;;;0BAClC,8OAAC;gBAAI,WAAW,OAAO,OAAO;;kCAC5B,8OAAC;wBAAM,WAAW,OAAO,KAAK;kCAAE;;;;;;kCAChC,8OAAC;wBAAK,WAAW,OAAO,IAAI;kCAAE;;;;;;;;;;;;0BAEhC,8OAAC;gBAAO,WAAW,OAAO,MAAM;0BAAE;;;;;;;;AAGxC","debugId":null}}]
-}

@@ -1,49 +1,46 @@
-"use client";
+'use client'
 
-import { data } from "@/data/data";
-import { TimelineEvent } from "@/types/timelineEvents";
-import { getAllLabels } from "@/utils";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { TimelineEvent } from '@/types/timelineEvents'
+import { createContext, ReactNode, useContext, useState } from 'react'
 
-const defaultContext = {};
-const StateContext = createContext(defaultContext);
-
+const StateContext = createContext({})
 interface IStateProvider {
-  children: ReactNode;
+	children: ReactNode
 }
 
 export const StateProvider = ({ children }: IStateProvider) => {
-  const [theme, setTheme] = useState("light");
-  const [activeLabels, setLabels] = useState<string[]>(getAllLabels(data));
-  const [activeEvents, setActiveEvents] = useState<TimelineEvent[]>([]);
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
+	const [theme, setTheme] = useState('light')
+	const [activeLabel, setLabel] = useState<string | null>(null)
+	const [activeEvent, setActiveEvent] = useState<TimelineEvent | null>(null)
 
-  const toggleLabels = (label: string) => {
-    setLabels((prevLabels) =>
-      prevLabels.includes(label)
-        ? prevLabels.filter((l) => l !== label)
-        : [...prevLabels, label]
-    );
-  };
+	const toggleTheme = () => {
+		setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+	}
 
-  return (
-    <StateContext.Provider
-      value={{
-        theme,
-        toggleTheme,
-        activeLabels,
-        toggleLabels,
-        activeEvents,
-        setActiveEvents,
-      }}
-    >
-      {children}
-    </StateContext.Provider>
-  );
-};
+	const handleLabel = (label: string) => {
+		setLabel(label)
+	}
+
+	const handleEvent = (event: TimelineEvent | null) => {
+		setActiveEvent(event)
+	}
+
+	return (
+		<StateContext.Provider
+			value={{
+				theme,
+				toggleTheme,
+				activeLabel,
+				handleLabel,
+				activeEvent,
+				handleEvent
+			}}
+		>
+			{children}
+		</StateContext.Provider>
+	)
+}
 
 export const useStateProvider = () => {
-  return useContext(StateContext);
-};
+	return useContext(StateContext)
+}

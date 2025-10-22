@@ -1,12 +1,17 @@
 .labels {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  list-style-type: none;
-  border: 1px solid red;
+	display: flex;
+	justify-items: center;
+	list-style-type: none;
 
-  li {
-    margin: 10px;
-  }
+	li {
+		button {
+			font-size: 16px;
+			color: #4a6da7;
+			padding: 6px 12px;
+
+			&.active {
+				color: #ededed;
+			}
+		}
+	}
 }
