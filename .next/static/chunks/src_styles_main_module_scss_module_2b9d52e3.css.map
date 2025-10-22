@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///turbopack:///[project]/src/styles/Users/matheusximenes/bible-timeline/src/styles/main.module.scss"],"sourcesContent":[".header {\n  background-color: black;\n}\n\n.content {\n  display: flex;\n  height: 100%;\n}\n\n.aside {\n  // background-color: azure;\n}\n\n.main {\n  // background-color: white;\n  width: 100%;\n}\n\n.footer {\n  background-color: blueviolet;\n}\n"],"names":[],"mappings":"AAAA;;;;AAIA;;;;;AASA;;;;AAKA","debugId":null}}]
+}

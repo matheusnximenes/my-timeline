@@ -1,0 +1,55 @@
+$lineHeight: 24px;
+
+.line {
+  display: block;
+  margin-bottom: 8px;
+
+  .line_wrapper {
+    position: relative;
+  }
+
+  .title_wrapper {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    margin: 4px;
+
+    &.isLandmark {
+      color: red;
+    }
+  }
+
+  .title {
+    margin-right: 8px;
+  }
+
+  .element {
+    color: white;
+    background-color: white;
+    height: $lineHeight;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+
+    &.isLandmark {
+      background-color: red;
+    }
+  }
+}
+
+.line {
+  width: 100%;
+  height: auto;
+}
+.line_start,
+.line_end {
+  width: 20px;
+  height: $lineHeight;
+}
+
+.landmark {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-left: 1px dashed red;
+}

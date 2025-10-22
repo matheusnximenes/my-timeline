@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///turbopack:///[project]/src/components/timeline/parts/Users/matheusximenes/bible-timeline/src/components/timeline/parts/event.module.scss"],"sourcesContent":["$lineHeight: 24px;\n\n.line {\n  display: block;\n  margin-bottom: 8px;\n\n  .line_wrapper {\n    position: relative;\n  }\n\n  .title_wrapper {\n    display: flex;\n    justify-content: space-between;\n    white-space: nowrap;\n    margin: 4px;\n\n    &.isLandmark {\n      color: red;\n    }\n  }\n\n  .title {\n    margin-right: 8px;\n  }\n\n  .element {\n    color: white;\n    background-color: white;\n    height: $lineHeight;\n    display: flex;\n    justify-content: space-between;\n    align-items: stretch;\n\n    &.isLandmark {\n      background-color: red;\n    }\n  }\n}\n\n.line {\n  width: 100%;\n  height: auto;\n}\n.line_start,\n.line_end {\n  width: 20px;\n  height: $lineHeight;\n}\n\n.landmark {\n  position: absolute;\n  top: 0;\n  height: 100%;\n  border-left: 1px dashed red;\n}\n"],"names":[],"mappings":"AAEA;;;;;AAIE;;;;AAIA;;;;;;;AAME;;;;AAKF;;;;AAIA;;;;;;;;;AAQE;;;;AAMJ;;;;;AAIA;;;;;AAMA"}}]
+}

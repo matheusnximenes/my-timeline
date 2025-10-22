@@ -1,0 +1,12 @@
+.labels {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  list-style-type: none;
+  border: 1px solid red;
+
+  li {
+    margin: 10px;
+  }
+}

@@ -1,0 +1,397 @@
+module.exports = [
+"[project]/.next-internal/server/app/page/actions.js [app-rsc] (server actions loader, ecmascript)", ((__turbopack_context__, module, exports) => {
+
+}),
+"[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript, Next.js Server Component)", ((__turbopack_context__) => {
+
+__turbopack_context__.n(__turbopack_context__.i("[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript)"));
+}),
+"[project]/src/app/layout.tsx [app-rsc] (ecmascript, Next.js Server Component)", ((__turbopack_context__) => {
+
+__turbopack_context__.n(__turbopack_context__.i("[project]/src/app/layout.tsx [app-rsc] (ecmascript)"));
+}),
+"[project]/src/types/timelineEvents.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "BibleBook",
+    ()=>BibleBook,
+    "Era",
+    ()=>Era,
+    "Labels",
+    ()=>Labels,
+    "Type",
+    ()=>Type
+]);
+var Labels = /*#__PURE__*/ function(Labels) {
+    Labels["GENESIS"] = "genesis";
+    Labels["CHARACTERS"] = "characters";
+    Labels["JW_EVENTS"] = "jw events";
+    Labels["BIBLES"] = "bibles";
+    Labels["PROPHESIES"] = "prophesies";
+    Labels["CHRIST_PROPHESIES"] = "Christ prophesies";
+    Labels["JESUS"] = "jesus";
+    Labels["BIBLE_EVENTS"] = "bible events";
+    return Labels;
+}({});
+var Era = /*#__PURE__*/ function(Era) {
+    Era["BC"] = "BC";
+    Era["EC"] = "EC";
+    return Era;
+}({});
+var Type = /*#__PURE__*/ function(Type) {
+    Type["ACCURATE"] = "accurate";
+    Type["INACCURATE"] = "inaccurate";
+    return Type;
+}({});
+var BibleBook = /*#__PURE__*/ function(BibleBook) {
+    // Old Testament
+    BibleBook["GENESIS"] = "genesis";
+    BibleBook["EXODUS"] = "exodus";
+    BibleBook["LEVITICUS"] = "leviticus";
+    BibleBook["NUMBERS"] = "numbers";
+    BibleBook["DEUTERONOMY"] = "deuteronomy";
+    BibleBook["JOSHUA"] = "joshua";
+    BibleBook["JUDGES"] = "judges";
+    BibleBook["RUTH"] = "ruth";
+    BibleBook["FIRST_SAMUEL"] = "1 samuel";
+    BibleBook["SECOND_SAMUEL"] = "2 samuel";
+    BibleBook["FIRST_KINGS"] = "1 kings";
+    BibleBook["SECOND_KINGS"] = "2 kings";
+    BibleBook["FIRST_CHRONICLES"] = "1 chronicles";
+    BibleBook["SECOND_CHRONICLES"] = "2 chronicles";
+    BibleBook["EZRA"] = "ezra";
+    BibleBook["NEHEMIAH"] = "nehemiah";
+    BibleBook["ESTHER"] = "esther";
+    BibleBook["JOB"] = "job";
+    BibleBook["PSALMS"] = "psalms";
+    BibleBook["PROVERBS"] = "proverbs";
+    BibleBook["ECCLESIASTES"] = "ecclesiastes";
+    BibleBook["SONG_OF_SOLOMON"] = "song of solomon";
+    BibleBook["ISAIAH"] = "isaiah";
+    BibleBook["JEREMIAH"] = "jeremiah";
+    BibleBook["LAMENTATIONS"] = "lamentations";
+    BibleBook["EZEKIEL"] = "ezekiel";
+    BibleBook["DANIEL"] = "daniel";
+    BibleBook["HOSEA"] = "hosea";
+    BibleBook["JOEL"] = "joel";
+    BibleBook["AMOS"] = "amos";
+    BibleBook["OBADIAH"] = "obadiah";
+    BibleBook["JONAH"] = "jonah";
+    BibleBook["MICAH"] = "micah";
+    BibleBook["NAHUM"] = "nahum";
+    BibleBook["HABAKKUK"] = "habakkuk";
+    BibleBook["ZEPHANIAH"] = "zephaniah";
+    BibleBook["HAGGAI"] = "haggai";
+    BibleBook["ZECHARIAH"] = "zechariah";
+    BibleBook["MALACHI"] = "malachi";
+    // New Testament
+    BibleBook["MATTHEW"] = "matthew";
+    BibleBook["MARK"] = "mark";
+    BibleBook["LUKE"] = "luke";
+    BibleBook["JOHN"] = "john";
+    BibleBook["ACTS"] = "acts";
+    BibleBook["ROMANS"] = "romans";
+    BibleBook["FIRST_CORINTHIANS"] = "1 corinthians";
+    BibleBook["SECOND_CORINTHIANS"] = "2 corinthians";
+    BibleBook["GALATIANS"] = "galatians";
+    BibleBook["EPHESIANS"] = "ephesians";
+    BibleBook["PHILIPPIANS"] = "philippians";
+    BibleBook["COLOSSIANS"] = "colossians";
+    BibleBook["FIRST_THESSALONIANS"] = "1 thessalonians";
+    BibleBook["SECOND_THESSALONIANS"] = "2 thessalonians";
+    BibleBook["FIRST_TIMOTHY"] = "1 timothy";
+    BibleBook["SECOND_TIMOTHY"] = "2 timothy";
+    BibleBook["TITUS"] = "titus";
+    BibleBook["PHILEMON"] = "philemon";
+    BibleBook["HEBREWS"] = "hebrews";
+    BibleBook["JAMES"] = "james";
+    BibleBook["FIRST_PETER"] = "1 peter";
+    BibleBook["SECOND_PETER"] = "2 peter";
+    BibleBook["FIRST_JOHN"] = "1 john";
+    BibleBook["SECOND_JOHN"] = "2 john";
+    BibleBook["THIRD_JOHN"] = "3 john";
+    BibleBook["JUDE"] = "jude";
+    BibleBook["REVELATION"] = "revelation";
+    return BibleBook;
+}({});
+}),
+"[project]/src/data/data.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "data",
+    ()=>data
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/types/timelineEvents.ts [app-rsc] (ecmascript)");
+;
+const data = [
+    {
+        id: 1,
+        order: 0,
+        title: "Adam",
+        description: "Adam 2",
+        start: {
+            year: 4052,
+            era: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Era"].BC,
+            type: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Type"].ACCURATE
+        },
+        end: {
+            year: 4052 + 900,
+            era: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Era"].BC,
+            type: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Type"].ACCURATE
+        },
+        custom: {
+            bgColor: "black",
+            color: "red",
+            lineType: "solid"
+        },
+        sources: [
+            {
+                name: "doc",
+                link: "jw.org"
+            }
+        ],
+        bible: [
+            {
+                book: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BibleBook"].GENESIS,
+                chapter: 1,
+                verses: "1-2",
+                link: "https://www.jw.org"
+            }
+        ],
+        imgUrl: "https://www.jw.org",
+        labels: [
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].GENESIS,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].CHARACTERS,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].JW_EVENTS,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].BIBLES,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].PROPHESIES,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].CHRIST_PROPHESIES,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].JESUS,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Labels"].BIBLE_EVENTS
+        ],
+        other: [
+            {
+                name: "Article",
+                srcUrl: "link",
+                order: 0
+            },
+            {
+                name: "Book",
+                srcUrl: "link",
+                order: 1
+            },
+            {
+                name: "Text",
+                srcUrl: "link",
+                order: 2
+            },
+            {
+                name: "Pespicaz",
+                srcUrl: "link",
+                order: 3
+            },
+            {
+                name: "Img",
+                srcUrl: "link",
+                order: 4
+            }
+        ]
+    },
+    {
+        id: 2,
+        order: 1,
+        title: "Adam",
+        description: "Adam 2",
+        start: {
+            year: 30,
+            era: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Era"].EC,
+            type: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Type"].ACCURATE
+        },
+        end: {
+            year: 33,
+            era: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Era"].EC,
+            type: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Type"].ACCURATE
+        }
+    }
+];
+}),
+"[project]/src/components/timeline/parts/baseline.module.scss [app-rsc] (css module)", ((__turbopack_context__) => {
+
+__turbopack_context__.v({
+  "grid": "baseline-module-scss-module__e7t79a__grid",
+});
+}),
+"[project]/src/components/timeline/parts/baseline.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$timeline$2f$parts$2f$baseline$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__ = __turbopack_context__.i("[project]/src/components/timeline/parts/baseline.module.scss [app-rsc] (css module)");
+;
+;
+const Baseline = ({ start, era })=>{
+    const currentYear = new Date().getFullYear();
+    const years = [
+        start,
+        0,
+        currentYear
+    ];
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$timeline$2f$parts$2f$baseline$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].grid,
+        style: {
+            gridTemplateColumns: `repeat(${years.length}, 1fr)`
+        },
+        children: years.map((y, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: y
+            }, index, false, {
+                fileName: "[project]/src/components/timeline/parts/baseline.tsx",
+                lineNumber: 18,
+                columnNumber: 9
+            }, ("TURBOPACK compile-time value", void 0)))
+    }, void 0, false, {
+        fileName: "[project]/src/components/timeline/parts/baseline.tsx",
+        lineNumber: 13,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
+};
+const __TURBOPACK__default__export__ = Baseline;
+}),
+"[project]/src/components/timeline/index.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$data$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/data/data.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$timeline$2f$parts$2f$baseline$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/timeline/parts/baseline.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/types/timelineEvents.ts [app-rsc] (ecmascript)");
+;
+;
+;
+;
+const Timeline = ()=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                children: "title"
+            }, void 0, false, {
+                fileName: "[project]/src/components/timeline/index.tsx",
+                lineNumber: 8,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0)),
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$data$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["data"].map((t)=>{
+                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    children: t.title
+                }, t.id, false, {
+                    fileName: "[project]/src/components/timeline/index.tsx",
+                    lineNumber: 10,
+                    columnNumber: 16
+                }, ("TURBOPACK compile-time value", void 0));
+            }),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$timeline$2f$parts$2f$baseline$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                start: 50,
+                era: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$types$2f$timelineEvents$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Era"].BC
+            }, void 0, false, {
+                fileName: "[project]/src/components/timeline/index.tsx",
+                lineNumber: 12,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true);
+};
+const __TURBOPACK__default__export__ = Timeline;
+}),
+"[project]/src/styles/main.module.scss [app-rsc] (css module)", ((__turbopack_context__) => {
+
+__turbopack_context__.v({
+  "content": "main-module-scss-module__ofRKla__content",
+  "footer": "main-module-scss-module__ofRKla__footer",
+  "header": "main-module-scss-module__ofRKla__header",
+  "main": "main-module-scss-module__ofRKla__main",
+});
+}),
+"[project]/src/app/page.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>Home
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$timeline$2f$index$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/timeline/index.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$styles$2f$main$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__ = __turbopack_context__.i("[project]/src/styles/main.module.scss [app-rsc] (css module)");
+;
+;
+;
+function Home() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$styles$2f$main$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].header,
+                children: "Header"
+            }, void 0, false, {
+                fileName: "[project]/src/app/page.tsx",
+                lineNumber: 7,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$styles$2f$main$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].content,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("aside", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$styles$2f$main$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].aside,
+                        children: "drawer"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/page.tsx",
+                        lineNumber: 9,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$styles$2f$main$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].main,
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$timeline$2f$index$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                            fileName: "[project]/src/app/page.tsx",
+                            lineNumber: 11,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/page.tsx",
+                        lineNumber: 10,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/page.tsx",
+                lineNumber: 8,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$styles$2f$main$2e$module$2e$scss__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].footer,
+                children: "Footer"
+            }, void 0, false, {
+                fileName: "[project]/src/app/page.tsx",
+                lineNumber: 14,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true);
+}
+}),
+"[project]/src/app/page.tsx [app-rsc] (ecmascript, Next.js Server Component)", ((__turbopack_context__) => {
+
+__turbopack_context__.n(__turbopack_context__.i("[project]/src/app/page.tsx [app-rsc] (ecmascript)"));
+}),
+"[externals]/next/dist/shared/lib/no-fallback-error.external.js [external] (next/dist/shared/lib/no-fallback-error.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/shared/lib/no-fallback-error.external.js", () => require("next/dist/shared/lib/no-fallback-error.external.js"));
+
+module.exports = mod;
+}),
+];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__975e7279._.js.map

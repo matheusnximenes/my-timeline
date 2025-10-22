@@ -1,0 +1,83 @@
+/* [project]/src/components/timeline/parts/baseline.module.scss.module.css [app-client] (css) */
+.baseline-module-scss-module__e7t79a__baseline {
+  border-top: 1px solid #fff;
+  flex-basis: 100%;
+  display: flex;
+}
+
+.baseline-module-scss-module__e7t79a__year {
+  white-space: nowrap;
+  width: 1px;
+  position: relative;
+  overflow: visible;
+}
+
+.baseline-module-scss-module__e7t79a__year:after {
+  content: " ";
+  background-color: #fff;
+  border-radius: 4px;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+}
+
+.baseline-module-scss-module__e7t79a__year:before {
+  content: " ";
+  border-left: 1px solid #fff;
+}
+
+.baseline-module-scss-module__e7t79a__year_text {
+  position: relative;
+  top: 24px;
+  left: -16px;
+}
+
+/* [project]/src/components/timeline/timeline.module.scss.module.css [app-client] (css) */
+.timeline-module-scss-module__xP3TOq__wrapper {
+  flex-wrap: wrap;
+  margin-top: 60px;
+  display: flex;
+}
+
+/* [project]/src/styles/main.module.scss.module.css [app-client] (css) */
+.main-module-scss-module__ofRKla__root {
+  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+}
+
+.main-module-scss-module__ofRKla__header {
+  background-color: #000;
+  flex-shrink: 0;
+}
+
+.main-module-scss-module__ofRKla__content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.main-module-scss-module__ofRKla__aside {
+  flex-shrink: 0;
+}
+
+.main-module-scss-module__ofRKla__main {
+  flex: 1;
+  padding: 20px 40px;
+  overflow: auto;
+}
+
+.main-module-scss-module__ofRKla__title {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+}
+
+.main-module-scss-module__ofRKla__footer {
+  background-color: #8a2be2;
+  flex-shrink: 0;
+}
+
+/*# sourceMappingURL=src_189bbcbb._.css.map*/

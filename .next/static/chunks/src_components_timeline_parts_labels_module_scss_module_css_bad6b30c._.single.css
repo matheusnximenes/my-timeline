@@ -1,0 +1,15 @@
+/* [project]/src/components/timeline/parts/labels.module.scss.module.css [app-client] (css) */
+.labels-module-scss-module__fEw14q__labels {
+  border: 1px solid red;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 50px;
+  list-style-type: none;
+  display: flex;
+}
+
+.labels-module-scss-module__fEw14q__labels li {
+  margin: 10px;
+}
+
+/*# sourceMappingURL=src_components_timeline_parts_labels_module_scss_module_css_bad6b30c._.single.css.map*/

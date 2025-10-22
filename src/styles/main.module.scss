@@ -1,0 +1,47 @@
+// Root container to fill viewport
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  background-color: black;
+  align-items: center;
+  flex-shrink: 0; // Prevent header from shrinking
+
+  img {
+    width: 80px;
+  }
+}
+
+.content {
+  display: flex;
+  flex: 1; // Take up remaining space
+  min-height: 0; // Allow content to shrink below its natural size
+}
+
+.aside {
+  // background-color: azure;
+  flex-shrink: 0; // Prevent sidebar from shrinking
+  display: none;
+}
+
+.main {
+  // background-color: white;
+  flex: 1; // Take up remaining horizontal space
+  overflow: auto;
+  padding: 20px 40px;
+}
+
+.title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.footer {
+  background-color: blueviolet;
+  flex-shrink: 0; // Prevent footer from shrinking
+}
