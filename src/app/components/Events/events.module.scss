@@ -1,0 +1,23 @@
+li.event {
+	padding: 0;
+	margin-bottom: 10px;
+	list-style: none;
+	border-bottom: 1px solid hsla(0, 0%, 12%, 1);
+
+	.line {
+		height: 24px;
+
+		line_inner_start {
+			background-color: aqua;
+		}
+
+		.line_inner {
+			height: inherit;
+			background-color: aqua;
+		}
+
+		.line_inner_end {
+			background-color: aqua;
+		}
+	}
+}

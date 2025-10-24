@@ -1,0 +1,57 @@
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: 1px solid hsla(0, 0%, 12%, 1);
+	width: inherit;
+	padding: 12px;
+
+	button {
+		background: white;
+		border: none;
+		color: black;
+		font-size: 14px;
+		padding: 2px 12px;
+		margin-right: 10px;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+}
+
+.container {
+	width: 20vw;
+	position: fixed;
+	max-height: 80vh;
+	overflow-y: auto;
+	top: 70px;
+	right: 20px;
+	border: 1px solid hsla(0, 0%, 12%, 1);
+	border-radius: 4px;
+	background-color: hsla(0, 0%, 4%, 1);
+
+	h2 {
+		margin-bottom: 20px;
+		font-size: 16px;
+		padding: 12px;
+		border-bottom: 1px solid hsla(0, 0%, 12%, 1);
+	}
+
+	.closeButton {
+		position: absolute;
+		right: 0;
+		top: 0;
+		border: none;
+		border-left: 1px solid hsla(0, 0%, 12%, 1);
+		background-color: transparent;
+		color: white;
+		font-size: 16px;
+		padding: 11px 8px;
+		cursor: pointer;
+	}
+}
+
+.eventList {
+	min-height: 90vh;
+	width: inherit;
+	overflow: auto;
+}
