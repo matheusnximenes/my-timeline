@@ -1,30 +1,66 @@
-import { ITimelineEvent } from '@/db/db.model'
+import { Era, ITimelineEvent } from '@/db/db.model'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import styles from './event-element.module.scss'
+import { getDistance, getDistanceFromStart } from './utils'
+
+export interface ITimelineBounds {
+	minYear: number
+	minEra: Era
+	maxYear: number
+	maxEra: Era
+}
 
 interface EventsProps {
 	event: ITimelineEvent
 	deleteEvent: (id: number) => Promise<void>
 	handleSelectEvent: (e: ITimelineEvent) => void
+	timelineBounds: ITimelineBounds
+	step: number
 }
 
-const Events = ({ event, deleteEvent, handleSelectEvent }: EventsProps) => {
-	const { startYear, endYear, startType, endType, id } = event
-	const distance = endYear - startYear
+const Events = ({ event, deleteEvent, handleSelectEvent, timelineBounds, step }: EventsProps) => {
+	const { startYear, endYear, startType, endType, startEra, endEra, id } = event
+
+	const distance = getDistance(startYear, endYear, startEra, endEra)
+	const distanceFromStart = getDistanceFromStart(timelineBounds, startEra, startYear, step)
+
 	return (
-		<li className={styles.event}>
-			<div className={styles.title_wrapper}>
-				<span>{event.title}</span>
+		<li className={styles.event} style={{ marginLeft: `${distanceFromStart}px` }}>
+			<div>
 				<span>
-					{startYear} {event.startEra} ({event.startType}){event.endYear} {event.endEra} (
-					{event.endType})
+					{event.mainImgUrl && (
+						<img
+							src={event.mainImgUrl}
+							alt={event.title}
+							width={50}
+							height={50}
+							className={styles.mainImage}
+						/>
+					)}
 				</span>
-				<button onClick={() => deleteEvent(event.id!)}>delete</button>
-				<button onClick={() => handleSelectEvent(event)}>edit</button>
 			</div>
-			<div className={styles.line} style={{ width: `${distance}px` }}>
-				<div className={styles.line_inner_start} />
-				<div className={styles.line_inner} />
-				<div className={styles.line_inner_end} />
+			<div className={styles.wrapper}>
+				<div className={styles.line} style={{ width: `${distance}px` }}>
+					<div className={styles.line_inner_start} />
+					<div className={styles.line_inner}>
+						<div>
+							{event.title} - {event.description}
+						</div>
+						<div>
+							{startYear}
+							<span className={styles.era}>{startEra}</span> - {endYear}
+							<span className={styles.era}>{endEra}</span>
+						</div>
+					</div>
+					<div className={styles.line_inner_end} />
+				</div>
+				<button onClick={() => deleteEvent(event.id!)}>
+					<DeleteIcon fontSize='small' />
+				</button>
+				<button onClick={() => handleSelectEvent(event)}>
+					<EditIcon fontSize='small' />
+				</button>
 			</div>
 		</li>
 	)

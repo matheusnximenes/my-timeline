@@ -18,6 +18,17 @@ body {
 	margin: 0;
 }
 
+ul,
+li {
+	list-style: none; /* Removes bullet points or numbering */
+	margin: 0; /* Removes default outer spacing */
+	padding: 0; /* Removes default inner spacing */
+	/* You might also want to reset other properties depending on your needs */
+	/* For example, if you want to reset font styles: */
+	/* font-size: inherit; */
+	/* font-weight: normal; */
+}
+
 a {
 	color: inherit;
 	text-decoration: none;

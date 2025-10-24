@@ -12,8 +12,8 @@ export enum Labels {
 }
 
 export enum Era {
-	BC = 'BC',
-	EC = 'EC'
+	BCE = 'BCE',
+	CE = 'CE'
 }
 
 export enum Type {
@@ -116,13 +116,20 @@ export interface ITimelineEvent {
 	labels?: string[]
 }
 
+export interface ILabels {
+	id?: number
+	name: string
+	defaultColor: string
+}
 export class DB extends Dexie {
 	timeline!: Table<ITimelineEvent>
+	labels!: Table<ILabels>
 	constructor() {
 		super('CustomTimelineDB')
 		this.version(1).stores({
 			timeline:
-				'++id, order, title, description, startYear, startType, startEra, endYear, endType, endEra, customBgColor, customColor, customLineColor, customLineType, mainImgUrl, mainImgName, mainLinkUrl, mainLinkName, isLandmark, labels'
+				'++id, order, title, description, startYear, startType, startEra, endYear, endType, endEra, customBgColor, customColor, customLineColor, customLineType, mainImgUrl, mainImgName, mainLinkUrl, mainLinkName, isLandmark, labels',
+			labels: '++id, name, defaultColor'
 		})
 	}
 }

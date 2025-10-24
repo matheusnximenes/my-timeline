@@ -1,27 +1,24 @@
 'use client'
 
-import { db, ITimelineEvent, Labels } from '@/db/db.model'
+import { db, ITimelineEvent } from '@/db/db.model'
+import { getTimelineBounds } from '@/utils/timeline-utils'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
+import Baseline from '../baseline/baseline'
+import { generateGapYears } from '../baseline/utils'
 import Events from '../event-element/event-element'
-import Form from '../event-form/event-form'
+import EventForm from '../forms/event-form/event-form'
+import LabelsForm from '../forms/labels-form/labels-form'
+import Grid from '../grid/grid'
 import styles from './content.module.scss'
 
-const labelsOptions = [
-	Labels.GENESIS,
-	Labels.CHARACTERS,
-	Labels.JW_EVENTS,
-	Labels.BIBLES,
-	Labels.PROPHESIES,
-	Labels.CHRIST_PROPHESIES,
-	Labels.JESUS,
-	Labels.BIBLE_EVENTS
-]
-
 const Content = () => {
+	const step = 50
 	const [selectedEventId, setSelectedEventId] = useState<number | null>(null)
+	const [shownManageLabels, setShownManageLabels] = useState(false)
 	const [showContainer, setShowContainer] = useState(selectedEventId ? true : false)
 	const events = useLiveQuery(() => db.timeline.toArray())
+	const labels = useLiveQuery(() => db.labels.toArray())
 
 	if (!events) {
 		return null
@@ -30,7 +27,10 @@ const Content = () => {
 	const selectedEvent = events.find((e) => e.id === selectedEventId) || null
 
 	const deleteEvent = async (id: number) => {
-		await db.timeline.delete(id)
+		if (confirm('Are you sure you want to delete this event?')) {
+			await db.timeline.delete(id)
+			// Add your logic for deleting the item here
+		}
 	}
 
 	const onCloseForm = () => {
@@ -43,15 +43,38 @@ const Content = () => {
 		setShowContainer(true)
 	}
 
+	const timelineBounds = getTimelineBounds(events)
+	const years = timelineBounds
+		? generateGapYears(
+				timelineBounds.minYear,
+				timelineBounds.maxYear,
+				timelineBounds.minEra,
+				timelineBounds.maxEra,
+				step
+		  )
+		: []
+
 	return (
-		<>
+		<main className={styles.main}>
 			<header className={styles.header}>
 				<h1>My Timeline</h1>
-				<button className={styles.floatContainer} onClick={() => console.log('click')}>
+				<button
+					className={styles.manageButton}
+					onClick={() => {
+						setShowContainer(false)
+						setShownManageLabels(true)
+					}}
+				>
 					Manage Labels
 				</button>
-				<button className={styles.floatContainer} onClick={() => setShowContainer(!showContainer)}>
-					{showContainer ? 'Close' : 'Create'}
+				<button
+					onClick={() => {
+						setShowContainer(true)
+						setShownManageLabels(false)
+						setSelectedEventId(null)
+					}}
+				>
+					Create
 				</button>
 			</header>
 			{showContainer && (
@@ -59,20 +82,40 @@ const Content = () => {
 					<button className={styles.closeButton} onClick={() => setShowContainer(false)}>
 						X
 					</button>
-					<Form selectedEvent={selectedEvent} onClose={onCloseForm} labelsOptions={labelsOptions} />
+					<div className={styles.formContainer}>
+						<EventForm labelsList={labels} selectedEvent={selectedEvent} onClose={onCloseForm} />
+					</div>
 				</div>
 			)}
-			<ul className={styles.eventList}>
-				{events?.map((e) => (
-					<Events
-						event={e}
-						key={e.id}
-						deleteEvent={deleteEvent}
-						handleSelectEvent={handleSelectEvent}
-					/>
-				))}
-			</ul>
-		</>
+
+			{shownManageLabels && labels && (
+				<div className={styles.container}>
+					<button className={styles.closeButton} onClick={() => setShownManageLabels(false)}>
+						X
+					</button>
+					<div className={styles.formContainer}>
+						<LabelsForm labels={labels} onClose={onCloseForm} />
+					</div>
+				</div>
+			)}
+			<div className={styles.timelineContainer}>
+				<ul className={styles.eventList}>
+					<Grid yearsNumber={years.length + 1} step={step} />
+					{timelineBounds &&
+						events?.map((e) => (
+							<Events
+								event={e}
+								key={e.id}
+								deleteEvent={deleteEvent}
+								handleSelectEvent={handleSelectEvent}
+								timelineBounds={timelineBounds}
+								step={step}
+							/>
+						))}
+				</ul>
+				{timelineBounds && <Baseline years={years} step={step} />}
+			</div>
+		</main>
 	)
 }
 

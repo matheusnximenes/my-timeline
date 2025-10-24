@@ -1,0 +1,13 @@
+.grid {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	width: inherit;
+	height: 100%;
+	display: grid;
+
+	.gridCell {
+		border-left: 1px dashed hsla(0, 0%, 12%, 1);
+	}
+}

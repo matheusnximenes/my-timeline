@@ -1,13 +1,13 @@
 'use client'
 
-import { db, Era, ITimelineEvent, Type } from '@/db/db.model'
+import { db, Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
 import { useState } from 'react'
 import styles from './event-form.module.scss'
 
 interface IFormProps {
 	onClose: () => void
 	selectedEvent: ITimelineEvent | null
-	labelsOptions: string[]
+	labelsList: ILabels[] | undefined
 }
 
 const initialFormData = {
@@ -16,10 +16,10 @@ const initialFormData = {
 	description: '',
 	startYear: 0,
 	startType: Type.ACCURATE as Type,
-	startEra: Era.BC as Era,
+	startEra: Era.BCE as Era,
 	endYear: 0,
 	endType: Type.ACCURATE as Type,
-	endEra: Era.BC as Era,
+	endEra: Era.BCE as Era,
 	isLandmark: false,
 	mainImgName: '',
 	mainImgUrl: '',
@@ -32,7 +32,19 @@ const initialFormData = {
 	customLineType: ''
 }
 
-const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
+const borderStyles = [
+	'none',
+	'solid',
+	'dashed',
+	'dotted',
+	'double',
+	'groove',
+	'ridge',
+	'inset',
+	'outset'
+]
+
+const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 	const [formData, setFormData] = useState(selectedEvent ?? initialFormData)
 
 	const {
@@ -101,11 +113,11 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 	}
 
 	const handleValidForm = () => {
-		if (startEra === Era.BC) {
+		if (startEra === Era.BCE) {
 			return startYear > endYear
 		}
 
-		if (startEra === Era.EC) {
+		if (startEra === Era.CE) {
 			return startYear < endYear
 		}
 	}
@@ -114,7 +126,7 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 		<div className={styles.formContainer}>
 			<h2>Add Event</h2>
 			<form onSubmit={handleForm}>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='title'>
 						Title:
 						<input type='text' id='title' name='title' value={title} onChange={handleInputChange} />
@@ -187,8 +199,8 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 							value={startEra ?? ''}
 							onChange={handleInputChange}
 						>
-							<option value={Era.BC}>{Era.BC}</option>
-							<option value={Era.EC}>{Era.EC}</option>
+							<option value={Era.BCE}>{Era.BCE}</option>
+							<option value={Era.CE}>{Era.CE}</option>
 						</select>
 					</label>
 					<label htmlFor='startYear'>
@@ -218,8 +230,8 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 					<label htmlFor='endEra'>
 						End era:
 						<select id='endEra' name='endEra' value={endEra ?? ''} onChange={handleInputChange}>
-							<option value={Era.BC}>{Era.BC}</option>
-							<option value={Era.EC}>{Era.EC}</option>
+							<option value={Era.BCE}>{Era.BCE}</option>
+							<option value={Era.CE}>{Era.CE}</option>
 						</select>
 					</label>
 					<label htmlFor='endYear'>
@@ -272,9 +284,9 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 							value={labels ?? []}
 							onChange={handleMultipleSelectChange}
 						>
-							{labelsOptions.map((label) => (
-								<option key={label} value={label}>
-									{label}
+							{labelsList?.map((label) => (
+								<option key={label.id} value={label.id}>
+									{label.name}
 								</option>
 							))}
 						</select>
@@ -284,7 +296,7 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 					<label htmlFor='customBgColor'>
 						Background color:
 						<input
-							type='text'
+							type='color'
 							id='customBgColor'
 							name='customBgColor'
 							value={customBgColor}
@@ -294,7 +306,7 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 					<label htmlFor='customColor'>
 						Font color:
 						<input
-							type='text'
+							type='color'
 							id='customColor'
 							name='customColor'
 							value={customColor}
@@ -306,7 +318,7 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 					<label htmlFor='customLineColor'>
 						Outline Color:
 						<input
-							type='text'
+							type='color'
 							id='customLineColor'
 							name='customLineColor'
 							value={customLineColor}
@@ -315,13 +327,18 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 					</label>
 					<label htmlFor='customLineType'>
 						Line Type:
-						<input
-							type='text'
+						<select
 							id='customLineType'
 							name='customLineType'
 							value={customLineType}
 							onChange={handleInputChange}
-						/>
+						>
+							{borderStyles.map((style) => (
+								<option key={style} value={style}>
+									{style.charAt(0).toUpperCase() + style.slice(1)}
+								</option>
+							))}
+						</select>
 					</label>
 				</div>
 				<div className={styles.row}>
@@ -337,4 +354,4 @@ const Form = ({ onClose, selectedEvent, labelsOptions }: IFormProps) => {
 	)
 }
 
-export default Form
+export default EventForm

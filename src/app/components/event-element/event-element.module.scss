@@ -1,23 +1,47 @@
 li.event {
 	padding: 0;
 	margin-bottom: 10px;
-	list-style: none;
-	border-bottom: 1px solid hsla(0, 0%, 12%, 1);
+
+	button {
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		margin-right: 4px;
+	}
+
+	.mainImage {
+		border-radius: 50%;
+		border: 1px solid white;
+	}
+
+	.wrapper {
+		display: flex;
+	}
 
 	.line {
 		height: 24px;
+		margin-right: 8px;
 
 		line_inner_start {
-			background-color: aqua;
+			background-color: white;
 		}
 
 		.line_inner {
 			height: inherit;
-			background-color: aqua;
+			background-color: white;
+			display: flex;
+			justify-content: space-between;
+			color: black;
+			align-items: center;
+			padding: 4px 6px;
+
+			.era {
+				font-size: 12px;
+			}
 		}
 
 		.line_inner_end {
-			background-color: aqua;
+			background-color: white;
 		}
 	}
 }
