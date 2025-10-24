@@ -1,11 +1,22 @@
 'use client'
 
-import { db, ITimelineEvent } from '@/db/db.model'
+import { db, ITimelineEvent, Labels } from '@/db/db.model'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
-import Form from '../EventForm'
-import Events from '../Events/events'
+import Events from '../event-element/event-element'
+import Form from '../event-form/event-form'
 import styles from './content.module.scss'
+
+const labelsOptions = [
+	Labels.GENESIS,
+	Labels.CHARACTERS,
+	Labels.JW_EVENTS,
+	Labels.BIBLES,
+	Labels.PROPHESIES,
+	Labels.CHRIST_PROPHESIES,
+	Labels.JESUS,
+	Labels.BIBLE_EVENTS
+]
 
 const Content = () => {
 	const [selectedEventId, setSelectedEventId] = useState<number | null>(null)
@@ -36,6 +47,9 @@ const Content = () => {
 		<>
 			<header className={styles.header}>
 				<h1>My Timeline</h1>
+				<button className={styles.floatContainer} onClick={() => console.log('click')}>
+					Manage Labels
+				</button>
 				<button className={styles.floatContainer} onClick={() => setShowContainer(!showContainer)}>
 					{showContainer ? 'Close' : 'Create'}
 				</button>
@@ -45,7 +59,7 @@ const Content = () => {
 					<button className={styles.closeButton} onClick={() => setShowContainer(false)}>
 						X
 					</button>
-					<Form selectedEvent={selectedEvent} onClose={onCloseForm} />
+					<Form selectedEvent={selectedEvent} onClose={onCloseForm} labelsOptions={labelsOptions} />
 				</div>
 			)}
 			<ul className={styles.eventList}>

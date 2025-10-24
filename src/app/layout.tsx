@@ -1,4 +1,4 @@
-import { StateProvider } from '@/provider/state-provider'
+import { StateProvider } from '@/providers/global-state-provider'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'

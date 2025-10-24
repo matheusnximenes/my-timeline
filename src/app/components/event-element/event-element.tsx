@@ -1,5 +1,5 @@
 import { ITimelineEvent } from '@/db/db.model'
-import styles from './events.module.scss'
+import styles from './event-element.module.scss'
 
 interface EventsProps {
 	event: ITimelineEvent
