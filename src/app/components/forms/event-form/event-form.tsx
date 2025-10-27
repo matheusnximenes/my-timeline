@@ -3,6 +3,7 @@
 import { db, Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
 import { useState } from 'react'
 import styles from './event-form.module.scss'
+import { handleFormValidation } from './utils'
 
 interface IFormProps {
 	onClose: () => void
@@ -112,29 +113,19 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 		onClose()
 	}
 
-	const handleValidForm = () => {
-		if (startEra === Era.BCE) {
-			return startYear > endYear
-		}
-
-		if (startEra === Era.CE) {
-			return startYear < endYear
-		}
-	}
-
 	return (
 		<div className={styles.formContainer}>
-			<h2>Add Event</h2>
+			<h2>Event</h2>
 			<form onSubmit={handleForm}>
-				<div className='row'>
+				<div className={styles.row}>
 					<label htmlFor='title'>
-						Title:
+						Title
 						<input type='text' id='title' name='title' value={title} onChange={handleInputChange} />
 					</label>
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='description'>
-						Description:
+						Description
 						<input
 							type='text'
 							id='description'
@@ -146,7 +137,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='isLandMark'>
-						Is Landmark:
+						Is Landmark
 						<input
 							type='checkbox'
 							id='isLandmark'
@@ -158,7 +149,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='mainImgName'>
-						Main Image Name:
+						Main Image Name
 						<input
 							type='text'
 							id='mainImgName'
@@ -168,7 +159,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						/>
 					</label>
 					<label htmlFor='mainImgUrl'>
-						Main Image URL:
+						Main Image URL
 						<input
 							type='text'
 							id='mainImgUrl'
@@ -180,7 +171,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='order'>
-						Order:
+						Order
 						<input
 							type='number'
 							id='order'
@@ -192,7 +183,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='startEra'>
-						Start era:
+						Start era
 						<select
 							id='startEra'
 							name='startEra'
@@ -204,7 +195,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						</select>
 					</label>
 					<label htmlFor='startYear'>
-						Start year:
+						Start year
 						<input
 							type='number'
 							id='startYear'
@@ -214,7 +205,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						/>
 					</label>
 					<label htmlFor='startType'>
-						Start type:
+						Start type
 						<select
 							id='startType'
 							name='startType'
@@ -228,14 +219,14 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='endEra'>
-						End era:
+						End era
 						<select id='endEra' name='endEra' value={endEra ?? ''} onChange={handleInputChange}>
 							<option value={Era.BCE}>{Era.BCE}</option>
 							<option value={Era.CE}>{Era.CE}</option>
 						</select>
 					</label>
 					<label htmlFor='endYear'>
-						End year:
+						End year
 						<input
 							type='number'
 							id='endYear'
@@ -245,7 +236,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						/>
 					</label>
 					<label htmlFor='endType'>
-						End type:
+						End type
 						<select id='endType' name='endType' value={endType ?? ''} onChange={handleInputChange}>
 							<option value={Type.ACCURATE}>{Type.ACCURATE}</option>
 							<option value={Type.INACCURATE}>{Type.INACCURATE}</option>
@@ -254,7 +245,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='mainLinkName'>
-						Main Link Name:
+						Main Link Name
 						<input
 							type='text'
 							id='mainLinkName'
@@ -264,7 +255,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						/>
 					</label>
 					<label htmlFor='mainLinkUrl'>
-						Main Link URL:
+						Main Link URL
 						<input
 							type='text'
 							id='mainLinkUrl'
@@ -276,7 +267,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='labels'>
-						Labels:
+						Labels
 						<select
 							multiple
 							id='labels'
@@ -294,7 +285,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='customBgColor'>
-						Background color:
+						Background color
 						<input
 							type='color'
 							id='customBgColor'
@@ -304,7 +295,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						/>
 					</label>
 					<label htmlFor='customColor'>
-						Font color:
+						Font color
 						<input
 							type='color'
 							id='customColor'
@@ -316,7 +307,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='customLineColor'>
-						Outline Color:
+						Outline Color
 						<input
 							type='color'
 							id='customLineColor'
@@ -326,7 +317,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 						/>
 					</label>
 					<label htmlFor='customLineType'>
-						Line Type:
+						Line Type
 						<select
 							id='customLineType'
 							name='customLineType'
@@ -345,7 +336,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 					<button type='button' onClick={() => clearForm(selectedEvent ? true : false)}>
 						Clear
 					</button>
-					<button type='submit' disabled={!handleValidForm()}>
+					<button type='submit' disabled={!handleFormValidation(formData)}>
 						Save
 					</button>
 				</div>

@@ -15,15 +15,16 @@ interface EventsProps {
 	event: ITimelineEvent
 	deleteEvent: (id: number) => Promise<void>
 	handleSelectEvent: (e: ITimelineEvent) => void
-	timelineBounds: ITimelineBounds
-	step: number
+	years: {
+		year: number
+		era: Era
+	}[]
 }
 
-const Events = ({ event, deleteEvent, handleSelectEvent, timelineBounds, step }: EventsProps) => {
+const Events = ({ event, deleteEvent, handleSelectEvent, years }: EventsProps) => {
 	const { startYear, endYear, startType, endType, startEra, endEra, id } = event
-
 	const distance = getDistance(startYear, endYear, startEra, endEra)
-	const distanceFromStart = getDistanceFromStart(timelineBounds, startEra, startYear, step)
+	const distanceFromStart = getDistanceFromStart(years, startEra, startYear)
 
 	return (
 		<li className={styles.event} style={{ marginLeft: `${distanceFromStart}px` }}>
@@ -39,20 +40,19 @@ const Events = ({ event, deleteEvent, handleSelectEvent, timelineBounds, step }:
 						/>
 					)}
 				</span>
+				<div>
+					{event.title} - {event.description}
+				</div>
+				<div>
+					{startYear}
+					<span className={styles.era}>{startEra}</span> - {endYear}
+					<span className={styles.era}>{endEra}</span>
+				</div>
 			</div>
 			<div className={styles.wrapper}>
 				<div className={styles.line} style={{ width: `${distance}px` }}>
 					<div className={styles.line_inner_start} />
-					<div className={styles.line_inner}>
-						<div>
-							{event.title} - {event.description}
-						</div>
-						<div>
-							{startYear}
-							<span className={styles.era}>{startEra}</span> - {endYear}
-							<span className={styles.era}>{endEra}</span>
-						</div>
-					</div>
+					<div className={styles.line_inner}></div>
 					<div className={styles.line_inner_end} />
 				</div>
 				<button onClick={() => deleteEvent(event.id!)}>

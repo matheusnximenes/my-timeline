@@ -87,7 +87,6 @@ const Content = () => {
 					</div>
 				</div>
 			)}
-
 			{shownManageLabels && labels && (
 				<div className={styles.container}>
 					<button className={styles.closeButton} onClick={() => setShownManageLabels(false)}>
@@ -98,23 +97,22 @@ const Content = () => {
 					</div>
 				</div>
 			)}
-			<div className={styles.timelineContainer}>
-				<ul className={styles.eventList}>
-					<Grid yearsNumber={years.length + 1} step={step} />
-					{timelineBounds &&
-						events?.map((e) => (
-							<Events
-								event={e}
-								key={e.id}
-								deleteEvent={deleteEvent}
-								handleSelectEvent={handleSelectEvent}
-								timelineBounds={timelineBounds}
-								step={step}
-							/>
-						))}
-				</ul>
-				{timelineBounds && <Baseline years={years} step={step} />}
-			</div>
+
+			<ul className={styles.eventList}>
+				<Grid yearsNumber={years.length + 1} step={step} />
+				{timelineBounds &&
+					events?.map((e) => (
+						<Events
+							event={e}
+							key={e.id}
+							deleteEvent={deleteEvent}
+							handleSelectEvent={handleSelectEvent}
+							years={years}
+						/>
+					))}
+			</ul>
+
+			{timelineBounds && <Baseline years={years} step={step} />}
 		</main>
 	)
 }

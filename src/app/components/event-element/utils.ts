@@ -13,17 +13,20 @@ export const getDistance = (
 }
 
 export const getDistanceFromStart = (
-	timelineBounds: ITimelineBounds,
+	years: {
+		year: number
+		era: Era
+	}[],
 	startEra: Era,
-	startYear: number,
-	step: number
+	startYear: number
 ) => {
-	const timelineStartYear = timelineBounds.minYear
-	const timelineStartEra = timelineBounds.minEra
+	const initialYear = years[0] || {}
+	const timelineStartYear = initialYear.year
+	const timelineStartEra = initialYear.era
 
 	// Convert years to a comparable format (BC years are negative)
 	const timelineStart = timelineStartEra === Era.BCE ? -timelineStartYear : timelineStartYear
 	const eventStart = startEra === Era.BCE ? -startYear : startYear
 
-	return Math.abs(eventStart - timelineStart) + step
+	return Math.abs(eventStart - timelineStart)
 }

@@ -1,4 +1,5 @@
 li.event {
+	width: 100%;
 	padding: 0;
 	margin-bottom: 10px;
 
@@ -16,23 +17,25 @@ li.event {
 
 	.wrapper {
 		display: flex;
+		color: white;
 	}
 
 	.line {
 		height: 24px;
 		margin-right: 8px;
 
-		line_inner_start {
-			background-color: white;
+		.line_inner_start {
+			background-color: rgb(56, 242, 193);
 		}
 
 		.line_inner {
 			height: inherit;
-			background-color: white;
+			background-color: rgb(56, 242, 193);
 			display: flex;
 			justify-content: space-between;
-			color: black;
+			color: white;
 			align-items: center;
+
 			padding: 4px 6px;
 
 			.era {
@@ -41,7 +44,7 @@ li.event {
 		}
 
 		.line_inner_end {
-			background-color: white;
+			background-color: rgb(56, 242, 193);
 		}
 	}
 }

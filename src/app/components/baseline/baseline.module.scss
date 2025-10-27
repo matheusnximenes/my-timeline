@@ -1,6 +1,8 @@
 .baseline {
-	position: relative;
-	z-index: 1;
+	position: sticky;
+	bottom: 20px;
+	margin: 0 50px;
+	z-index: 999;
 	display: flex;
 	flex-direction: row;
 	height: 24px;

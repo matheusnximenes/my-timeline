@@ -58,9 +58,9 @@ export function getTimelineBounds(events: ITimelineEvent[]): TimelineBounds | nu
 	const maxDate = numberToYearEra(maxNumericDate)
 
 	return {
-		minYear: minDate.year,
-		minEra: minDate.era,
-		maxYear: maxDate.year,
-		maxEra: maxDate.era
+		minYear: maxDate.year,
+		minEra: maxDate.era ,
+		maxYear:  minDate.year,
+		maxEra: minDate.era
 	}
 }

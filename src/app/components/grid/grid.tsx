@@ -14,7 +14,7 @@ const Grid = ({ yearsNumber, step }: GridProps) => {
 			}}
 		>
 			{years.map((_, index) => (
-				<div key={index} className={styles.gridCell} style={{ marginRight: `${step}px` }} />
+				<div key={index} className={styles.gridCell} style={{ marginRight: `${step-1}px` }} />
 			))}
 		</div>
 	)
