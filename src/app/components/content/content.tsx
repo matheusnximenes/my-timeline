@@ -98,7 +98,7 @@ const Content = () => {
 				</div>
 			)}
 
-			<ul className={styles.eventList}>
+			<ul className={styles.eventList} style={{ width: `${years[0].year}px` }}>
 				<Grid yearsNumber={years.length + 1} step={step} />
 				{timelineBounds &&
 					events?.map((e) => (

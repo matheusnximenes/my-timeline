@@ -1,13 +1,35 @@
 li.event {
-	width: 100%;
-	padding: 0;
 	margin-bottom: 10px;
 
+	.isLandmark {
+		&::after {
+			position: absolute;
+			top: 0;
+			content: '';
+			border: 1px dashed red;
+			height: 100%;
+		}
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+
 	button {
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		margin-right: 4px;
+		display: none;
+	}
+
+	&:hover {
+		button {
+			display: block;
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			margin-right: 4px;
+			color: white;
+		}
 	}
 
 	.mainImage {
@@ -21,30 +43,26 @@ li.event {
 	}
 
 	.line {
+		display: flex;
 		height: 24px;
 		margin-right: 8px;
 
 		.line_inner_start {
-			background-color: rgb(56, 242, 193);
+			height: inherit;
+			background-color: rgb(37, 140, 112);
+			width: 24px;
 		}
 
 		.line_inner {
 			height: inherit;
 			background-color: rgb(56, 242, 193);
-			display: flex;
-			justify-content: space-between;
-			color: white;
-			align-items: center;
-
-			padding: 4px 6px;
-
-			.era {
-				font-size: 12px;
-			}
+			width: 100%;
 		}
 
 		.line_inner_end {
-			background-color: rgb(56, 242, 193);
+			height: inherit;
+			width: 24px;
+			background-color: rgb(55, 138, 116);
 		}
 	}
 }

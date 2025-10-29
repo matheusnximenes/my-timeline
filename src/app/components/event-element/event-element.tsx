@@ -27,9 +27,13 @@ const Events = ({ event, deleteEvent, handleSelectEvent, years }: EventsProps) =
 	const distanceFromStart = getDistanceFromStart(years, startEra, startYear)
 
 	return (
-		<li className={styles.event} style={{ marginLeft: `${distanceFromStart}px` }}>
-			<div>
-				<span>
+		<li
+			className={styles.event}
+			style={{ marginLeft: `${distanceFromStart}px`, width: `${distance}px` }}
+		>
+			{event.isLandmark && <div className={styles.isLandmark} />}
+			<div className={styles.header}>
+				<div className={styles.title}>
 					{event.mainImgUrl && (
 						<img
 							src={event.mainImgUrl}
@@ -39,9 +43,9 @@ const Events = ({ event, deleteEvent, handleSelectEvent, years }: EventsProps) =
 							className={styles.mainImage}
 						/>
 					)}
-				</span>
-				<div>
-					{event.title} - {event.description}
+					<span>
+						{event.title} - {event.description}
+					</span>
 				</div>
 				<div>
 					{startYear}
