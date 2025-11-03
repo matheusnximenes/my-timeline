@@ -1,6 +1,4 @@
-import { Era, ITimelineEvent } from '@/db/db.model'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
+import { Era, ITimelineEvent, Type } from '@/db/db.model'
 import styles from './event-element.module.scss'
 import { getDistance, getDistanceFromStart } from './utils'
 
@@ -19,12 +17,25 @@ interface EventsProps {
 		year: number
 		era: Era
 	}[]
+	selectedEvent: ITimelineEvent | null
 }
 
-const Events = ({ event, deleteEvent, handleSelectEvent, years }: EventsProps) => {
-	const { startYear, endYear, startType, endType, startEra, endEra, id } = event
+const Events = ({ event, handleSelectEvent, years, selectedEvent }: EventsProps) => {
+	const {
+		startYear,
+		endYear,
+		startType,
+		endType,
+		startEra,
+		endEra,
+		id,
+		customBgColor,
+		mainLinkName,
+		mainLinkUrl
+	} = event
 	const distance = getDistance(startYear, endYear, startEra, endEra)
 	const distanceFromStart = getDistanceFromStart(years, startEra, startYear)
+	const isInactive = selectedEvent?.id !== event.id
 
 	return (
 		<li
@@ -32,40 +43,55 @@ const Events = ({ event, deleteEvent, handleSelectEvent, years }: EventsProps) =
 			style={{ marginLeft: `${distanceFromStart}px`, width: `${distance}px` }}
 		>
 			{event.isLandmark && <div className={styles.isLandmark} />}
-			<div className={styles.header}>
-				<div className={styles.title}>
-					{event.mainImgUrl && (
-						<img
-							src={event.mainImgUrl}
-							alt={event.title}
-							width={50}
-							height={50}
-							className={styles.mainImage}
-						/>
+			<button
+				onClick={() => handleSelectEvent(event)}
+				className={`${styles.button} ${selectedEvent && isInactive ? styles.inactive : ''}`}
+			>
+				<div className={styles.header}>
+					<div className={styles.title}>
+						{event.mainImgUrl && (
+							<div className={styles.mainImage}>
+								<img src={event.mainImgUrl} alt={event.title} />
+							</div>
+						)}
+						<span>
+							{event.title} {event.description && `- ${event.description}`}
+						</span>
+					</div>
+					{mainLinkUrl && (
+						<a href={mainLinkUrl} target='_blank'>
+							{mainLinkName}
+						</a>
 					)}
-					<span>
-						{event.title} - {event.description}
-					</span>
+					<div className={styles.dates}>
+						{startYear}
+						<span className={styles.era}>{startEra}</span> - {endYear}
+						<span className={styles.era}>{endEra}</span>
+					</div>
 				</div>
-				<div>
-					{startYear}
-					<span className={styles.era}>{startEra}</span> - {endYear}
-					<span className={styles.era}>{endEra}</span>
-				</div>
-			</div>
-			<div className={styles.wrapper}>
+
 				<div className={styles.line} style={{ width: `${distance}px` }}>
-					<div className={styles.line_inner_start} />
-					<div className={styles.line_inner}></div>
-					<div className={styles.line_inner_end} />
+					{startType === Type.INACCURATE && (
+						<div className={styles.line_inner_start}>
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+						</div>
+					)}
+					<div className={styles.line_inner} style={{ backgroundColor: customBgColor }} />
+					{endType === Type.INACCURATE && (
+						<div className={styles.line_inner_end}>
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+							<div style={{ backgroundColor: customBgColor }} />
+						</div>
+					)}
 				</div>
-				<button onClick={() => deleteEvent(event.id!)}>
-					<DeleteIcon fontSize='small' />
-				</button>
-				<button onClick={() => handleSelectEvent(event)}>
-					<EditIcon fontSize='small' />
-				</button>
-			</div>
+			</button>
 		</li>
 	)
 }

@@ -1,7 +1,10 @@
 import { Era, ITimelineEvent } from "@/db/db.model"
 
-export const handleFormValidation = (formData: ITimelineEvent) => {
-        const { startEra, endEra, startYear, endYear } = formData
+export const handleFormValidation = (formData: ITimelineEvent | null) => {
+        if(!formData) {
+            return false
+        }
+        const { startEra, endEra, startYear, endYear } = formData || {}
 
         // Both dates are BCE
         if (startEra === Era.BCE && endEra === Era.BCE) {

@@ -1,36 +1,19 @@
 'use client'
 
-import { db, Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
-import { useState } from 'react'
+import { Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
 import styles from './event-form.module.scss'
 import { handleFormValidation } from './utils'
 
 interface IFormProps {
-	onClose: () => void
-	selectedEvent: ITimelineEvent | null
+	activeEvent: ITimelineEvent | null
 	labelsList: ILabels[] | undefined
-}
-
-const initialFormData = {
-	order: 0,
-	title: '',
-	description: '',
-	startYear: 0,
-	startType: Type.ACCURATE as Type,
-	startEra: Era.BCE as Era,
-	endYear: 0,
-	endType: Type.ACCURATE as Type,
-	endEra: Era.BCE as Era,
-	isLandmark: false,
-	mainImgName: '',
-	mainImgUrl: '',
-	mainLinkName: '',
-	mainLinkUrl: '',
-	labels: [] as string[],
-	customBgColor: '',
-	customColor: '',
-	customLineColor: '',
-	customLineType: ''
+	onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
+	onCheck: (e: React.ChangeEvent<HTMLInputElement>) => void
+	onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
+	onClear: () => void
+	onSave: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
+	onClose: () => void
+	deleteEvent: (e: number) => void
 }
 
 const borderStyles = [
@@ -45,10 +28,19 @@ const borderStyles = [
 	'outset'
 ]
 
-const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
-	const [formData, setFormData] = useState(selectedEvent ?? initialFormData)
-
+const EventForm = ({
+	onClose,
+	activeEvent,
+	labelsList,
+	onChange,
+	onSelect,
+	onSave,
+	onClear,
+	onCheck,
+	deleteEvent
+}: IFormProps) => {
 	const {
+		id,
 		order,
 		title,
 		description,
@@ -68,59 +60,16 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 		customColor,
 		customLineColor,
 		customLineType
-	} = formData
-
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target
-		setFormData({ ...formData, [name]: value })
-	}
-
-	const handleIsLandmarkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { checked } = e.target
-		setFormData({ ...formData, isLandmark: Boolean(checked) })
-	}
-
-	const handleMultipleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const selectedOptions = Array.from(e.target.selectedOptions)
-		const values = selectedOptions.map((option) => option.value)
-		setFormData({ ...formData, labels: values })
-	}
-
-	const clearForm = (isEditModel = false) => {
-		if (isEditModel && selectedEvent) {
-			setFormData(selectedEvent)
-		} else {
-			setFormData(initialFormData)
-		}
-	}
-
-	const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		e.stopPropagation()
-
-		if (selectedEvent) {
-			await db.timeline.put({
-				id: selectedEvent.id,
-				...formData
-			})
-		} else {
-			await db.timeline.add({
-				...formData
-			})
-		}
-
-		clearForm()
-		onClose()
-	}
+	} = activeEvent || {}
 
 	return (
 		<div className={styles.formContainer}>
 			<h2>Event</h2>
-			<form onSubmit={handleForm}>
+			<form onSubmit={onSave}>
 				<div className={styles.row}>
 					<label htmlFor='title'>
 						Title
-						<input type='text' id='title' name='title' value={title} onChange={handleInputChange} />
+						<input type='text' id='title' name='title' value={title} onChange={onChange} />
 					</label>
 				</div>
 				<div className={styles.row}>
@@ -131,7 +80,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='description'
 							name='description'
 							value={description}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 				</div>
@@ -143,7 +92,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='isLandmark'
 							name='isLandmark'
 							checked={isLandmark}
-							onChange={handleIsLandmarkChange}
+							onChange={onCheck}
 						/>
 					</label>
 				</div>
@@ -155,7 +104,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='mainImgName'
 							name='mainImgName'
 							value={mainImgName}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 					<label htmlFor='mainImgUrl'>
@@ -165,31 +114,20 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='mainImgUrl'
 							name='mainImgUrl'
 							value={mainImgUrl}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='order'>
 						Order
-						<input
-							type='number'
-							id='order'
-							name='order'
-							value={order}
-							onChange={handleInputChange}
-						/>
+						<input type='number' id='order' name='order' value={order} onChange={onChange} />
 					</label>
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='startEra'>
 						Start era
-						<select
-							id='startEra'
-							name='startEra'
-							value={startEra ?? ''}
-							onChange={handleInputChange}
-						>
+						<select id='startEra' name='startEra' value={startEra ?? ''} onChange={onChange}>
 							<option value={Era.BCE}>{Era.BCE}</option>
 							<option value={Era.CE}>{Era.CE}</option>
 						</select>
@@ -201,17 +139,12 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='startYear'
 							name='startYear'
 							value={startYear ?? ''}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 					<label htmlFor='startType'>
 						Start type
-						<select
-							id='startType'
-							name='startType'
-							value={startType ?? ''}
-							onChange={handleInputChange}
-						>
+						<select id='startType' name='startType' value={startType ?? ''} onChange={onChange}>
 							<option value={Type.ACCURATE}>{Type.ACCURATE}</option>
 							<option value={Type.INACCURATE}>{Type.INACCURATE}</option>
 						</select>
@@ -220,7 +153,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 				<div className={styles.row}>
 					<label htmlFor='endEra'>
 						End era
-						<select id='endEra' name='endEra' value={endEra ?? ''} onChange={handleInputChange}>
+						<select id='endEra' name='endEra' value={endEra ?? ''} onChange={onChange}>
 							<option value={Era.BCE}>{Era.BCE}</option>
 							<option value={Era.CE}>{Era.CE}</option>
 						</select>
@@ -232,12 +165,12 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='endYear'
 							name='endYear'
 							value={endYear ?? ''}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 					<label htmlFor='endType'>
 						End type
-						<select id='endType' name='endType' value={endType ?? ''} onChange={handleInputChange}>
+						<select id='endType' name='endType' value={endType ?? ''} onChange={onChange}>
 							<option value={Type.ACCURATE}>{Type.ACCURATE}</option>
 							<option value={Type.INACCURATE}>{Type.INACCURATE}</option>
 						</select>
@@ -251,7 +184,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='mainLinkName'
 							name='mainLinkName'
 							value={mainLinkName}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 					<label htmlFor='mainLinkUrl'>
@@ -261,22 +194,16 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='mainLinkUrl'
 							name='mainLinkUrl'
 							value={mainLinkUrl}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 				</div>
 				<div className={styles.row}>
 					<label htmlFor='labels'>
 						Labels
-						<select
-							multiple
-							id='labels'
-							name='labels'
-							value={labels ?? []}
-							onChange={handleMultipleSelectChange}
-						>
+						<select multiple id='labels' name='labels' value={labels ?? []} onChange={onSelect}>
 							{labelsList?.map((label) => (
-								<option key={label.id} value={label.id}>
+								<option key={label.id} value={label.name}>
 									{label.name}
 								</option>
 							))}
@@ -291,7 +218,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='customBgColor'
 							name='customBgColor'
 							value={customBgColor}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 					<label htmlFor='customColor'>
@@ -301,7 +228,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='customColor'
 							name='customColor'
 							value={customColor}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 				</div>
@@ -313,7 +240,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='customLineColor'
 							name='customLineColor'
 							value={customLineColor}
-							onChange={handleInputChange}
+							onChange={onChange}
 						/>
 					</label>
 					<label htmlFor='customLineType'>
@@ -322,7 +249,7 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 							id='customLineType'
 							name='customLineType'
 							value={customLineType}
-							onChange={handleInputChange}
+							onChange={onChange}
 						>
 							{borderStyles.map((style) => (
 								<option key={style} value={style}>
@@ -333,12 +260,13 @@ const EventForm = ({ onClose, selectedEvent, labelsList }: IFormProps) => {
 					</label>
 				</div>
 				<div className={styles.row}>
-					<button type='button' onClick={() => clearForm(selectedEvent ? true : false)}>
+					<button type='button' onClick={onClear}>
 						Clear
 					</button>
-					<button type='submit' disabled={!handleFormValidation(formData)}>
+					<button type='submit' disabled={!handleFormValidation(activeEvent)}>
 						Save
 					</button>
+					{id && <button onClick={() => deleteEvent(id)}>Delete</button>}
 				</div>
 			</form>
 		</div>

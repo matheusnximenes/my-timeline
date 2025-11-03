@@ -1,8 +1,5 @@
 .baseline {
-	position: sticky;
-	bottom: 20px;
 	margin: 0 50px;
-	z-index: 999;
 	display: flex;
 	flex-direction: row;
 	height: 24px;
@@ -28,6 +25,9 @@
 		}
 
 		.era {
+			position: absolute;
+			bottom: -20px;
+			left: 0;
 			font-size: 14px;
 		}
 	}

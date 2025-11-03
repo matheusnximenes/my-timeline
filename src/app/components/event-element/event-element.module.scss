@@ -1,12 +1,37 @@
 li.event {
-	margin-bottom: 10px;
+	margin-bottom: 16px;
+
+	.button {
+		background-color: transparent;
+		border: none;
+		color: white;
+		padding: 0;
+		margin: 0;
+		transition: 0.3s all ease-in-out;
+
+		&:hover {
+			cursor: pointer;
+			opacity: 0.8;
+
+			&::after {
+				position: absolute;
+				left: 0;
+				border-left: 1px solid white;
+				content: ' ';
+			}
+		}
+
+		&.inactive {
+			opacity: 0.6;
+		}
+	}
 
 	.isLandmark {
 		&::after {
 			position: absolute;
 			top: 0;
 			content: '';
-			border: 1px dashed red;
+			border-left: 1px dashed red;
 			height: 100%;
 		}
 	}
@@ -15,26 +40,42 @@ li.event {
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
-	}
+		white-space: nowrap;
 
-	button {
-		display: none;
-	}
+		.title {
+			position: relative;
+		}
 
-	&:hover {
-		button {
-			display: block;
-			background-color: transparent;
-			border: none;
-			cursor: pointer;
-			margin-right: 4px;
-			color: white;
+		a {
+			margin: 0 10px;
+			color: #47a8ff;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.dates {
+			margin-left: 8px;
 		}
 	}
 
 	.mainImage {
 		border-radius: 50%;
 		border: 1px solid white;
+		width: 50px;
+		height: 50px;
+		display: flex;
+		justify-items: center;
+		overflow: hidden;
+		background-color: white;
+		position: absolute;
+		left: -60px;
+
+		img {
+			align-self: center;
+			width: 100%;
+			height: auto;
+		}
 	}
 
 	.wrapper {
@@ -45,12 +86,37 @@ li.event {
 	.line {
 		display: flex;
 		height: 24px;
-		margin-right: 8px;
+		margin-top: 4px;
 
-		.line_inner_start {
+		.line_inner_start,
+		.line_inner_end {
+			display: flex;
+			flex-direction: row;
 			height: inherit;
-			background-color: rgb(37, 140, 112);
 			width: 24px;
+
+			div {
+				background-color: rgb(56, 242, 193);
+				margin-left: 2px;
+				height: inherit;
+				flex-shrink: 1;
+
+				&:first-child {
+					width: 2px;
+				}
+
+				&:nth-child(2) {
+					width: 4px;
+				}
+
+				&:nth-child(3) {
+					width: 8px;
+				}
+
+				&:nth-child(4) {
+					width: 16px;
+				}
+			}
 		}
 
 		.line_inner {
@@ -60,9 +126,23 @@ li.event {
 		}
 
 		.line_inner_end {
-			height: inherit;
-			width: 24px;
-			background-color: rgb(55, 138, 116);
+			div {
+				&:first-child {
+					width: 16px;
+				}
+
+				&:nth-child(2) {
+					width: 8px;
+				}
+
+				&:nth-child(3) {
+					width: 4px;
+				}
+
+				&:nth-child(4) {
+					width: 2px;
+				}
+			}
 		}
 	}
 }

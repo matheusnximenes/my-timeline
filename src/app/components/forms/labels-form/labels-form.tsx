@@ -2,7 +2,7 @@
 
 import { db, ILabels } from '@/db/db.model'
 import { useState } from 'react'
-import styles from '../event-form/event-form.module.scss'
+import styles from '../event-details/event-form.module.scss'
 
 interface LabelsFormProps {
 	labels: ILabels[]

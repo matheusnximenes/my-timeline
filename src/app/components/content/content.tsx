@@ -1,49 +1,135 @@
 'use client'
 
-import { db, ITimelineEvent } from '@/db/db.model'
+import { db, Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
 import { getTimelineBounds } from '@/utils/timeline-utils'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
 import Baseline from '../baseline/baseline'
 import { generateGapYears } from '../baseline/utils'
 import Events from '../event-element/event-element'
-import EventForm from '../forms/event-form/event-form'
+import EventForm from '../forms/event-details/event-form.tsx'
 import LabelsForm from '../forms/labels-form/labels-form'
 import Grid from '../grid/grid'
+import Labels from '../labels/labels'
 import styles from './content.module.scss'
+
+const initialFormData = {
+	id: undefined,
+	order: 0,
+	title: '',
+	description: '',
+	startYear: 0,
+	startType: Type.ACCURATE as Type,
+	startEra: Era.BCE as Era,
+	endYear: 0,
+	endType: Type.ACCURATE as Type,
+	endEra: Era.BCE as Era,
+	isLandmark: false,
+	mainImgName: '',
+	mainImgUrl: '',
+	mainLinkName: '',
+	mainLinkUrl: '',
+	labels: [] as string[],
+	customBgColor: '',
+	customColor: '',
+	customLineColor: '',
+	customLineType: ''
+}
+
+const borderStyles = [
+	'none',
+	'solid',
+	'dashed',
+	'dotted',
+	'double',
+	'groove',
+	'ridge',
+	'inset',
+	'outset'
+]
 
 const Content = () => {
 	const step = 50
-	const [selectedEventId, setSelectedEventId] = useState<number | null>(null)
+	const [selectedEvent, setSelectedEvent] = useState<ITimelineEvent | null>(null)
 	const [shownManageLabels, setShownManageLabels] = useState(false)
-	const [showContainer, setShowContainer] = useState(selectedEventId ? true : false)
-	const events = useLiveQuery(() => db.timeline.toArray())
+	const [inactiveLabels, setInactiveLabels] = useState<ILabels[]>([])
+	const allEvents = useLiveQuery(() => db.timeline.toArray())
 	const labels = useLiveQuery(() => db.labels.toArray())
 
-	if (!events) {
+	if (!allEvents) {
 		return null
 	}
 
-	const selectedEvent = events.find((e) => e.id === selectedEventId) || null
+	const events = allEvents.filter((event) =>
+		inactiveLabels?.every((l) => event.labels?.includes(l.name))
+	)
 
 	const deleteEvent = async (id: number) => {
 		if (confirm('Are you sure you want to delete this event?')) {
+			console.log('deleteEvent', id)
 			await db.timeline.delete(id)
-			// Add your logic for deleting the item here
+			setSelectedEvent(null)
 		}
 	}
 
-	const onCloseForm = () => {
-		setSelectedEventId(null)
-		setShowContainer(false)
-	}
-
 	const handleSelectEvent = (event: ITimelineEvent) => {
-		setSelectedEventId(event.id ?? null)
-		setShowContainer(true)
+		setSelectedEvent(event)
 	}
 
-	const timelineBounds = getTimelineBounds(events)
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value } = e.target
+		setSelectedEvent({ ...selectedEvent, [name]: value } as ITimelineEvent)
+	}
+
+	const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, checked } = e.target
+		setSelectedEvent({ ...selectedEvent, [name]: Boolean(checked) } as ITimelineEvent)
+	}
+
+	const handleMultipleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const selectedOptions = Array.from(e.target.selectedOptions)
+		const values = selectedOptions.map((option) => option.value)
+		setSelectedEvent({ ...selectedEvent, labels: values } as ITimelineEvent)
+	}
+
+	const handleInactiveLabels = (label: ILabels) => {
+		setInactiveLabels((prev) => {
+			const exists = prev.some((l) => l.id === label.id)
+			return exists ? prev.filter((l) => l.id !== label.id) : [...prev, label]
+		})
+	}
+
+	const onClear = () => {
+		setSelectedEvent(
+			(selectedEvent?.id
+				? events.find((e) => e.id === selectedEvent.id) ?? null
+				: initialFormData) as ITimelineEvent
+		)
+	}
+
+	const onClose = () => {
+		setSelectedEvent(null)
+	}
+
+	const onSave = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		e.stopPropagation()
+
+		if (selectedEvent?.id) {
+			await db.timeline.put({
+				id: selectedEvent.id,
+				...selectedEvent
+			})
+		} else {
+			await db.timeline.add({
+				...selectedEvent
+			} as ITimelineEvent)
+		}
+
+		onClose()
+	}
+
+	const timelineBounds = getTimelineBounds(events || [])
 	const years = timelineBounds
 		? generateGapYears(
 				timelineBounds.minYear,
@@ -61,7 +147,7 @@ const Content = () => {
 				<button
 					className={styles.manageButton}
 					onClick={() => {
-						setShowContainer(false)
+						setSelectedEvent(null)
 						setShownManageLabels(true)
 					}}
 				>
@@ -69,21 +155,35 @@ const Content = () => {
 				</button>
 				<button
 					onClick={() => {
-						setShowContainer(true)
 						setShownManageLabels(false)
-						setSelectedEventId(null)
+						setSelectedEvent(initialFormData as ITimelineEvent)
 					}}
 				>
 					Create
 				</button>
 			</header>
-			{showContainer && (
+			<Labels
+				labels={labels}
+				inactiveLabels={inactiveLabels}
+				handleInactiveLabels={handleInactiveLabels}
+			/>
+			{selectedEvent && (
 				<div className={styles.container}>
-					<button className={styles.closeButton} onClick={() => setShowContainer(false)}>
+					<button className={styles.closeButton} onClick={() => setSelectedEvent(null)}>
 						X
 					</button>
 					<div className={styles.formContainer}>
-						<EventForm labelsList={labels} selectedEvent={selectedEvent} onClose={onCloseForm} />
+						<EventForm
+							labelsList={labels}
+							activeEvent={selectedEvent}
+							onChange={handleInputChange}
+							onSelect={handleMultipleSelectChange}
+							onCheck={handleCheckChange}
+							onClear={onClear}
+							onClose={onClose}
+							onSave={onSave}
+							deleteEvent={deleteEvent}
+						/>
 					</div>
 				</div>
 			)}
@@ -93,26 +193,33 @@ const Content = () => {
 						X
 					</button>
 					<div className={styles.formContainer}>
-						<LabelsForm labels={labels} onClose={onCloseForm} />
+						<LabelsForm labels={labels} onClose={() => setShownManageLabels(false)} />
 					</div>
 				</div>
 			)}
 
-			<ul className={styles.eventList} style={{ width: `${years[0].year}px` }}>
-				<Grid yearsNumber={years.length + 1} step={step} />
-				{timelineBounds &&
-					events?.map((e) => (
-						<Events
-							event={e}
-							key={e.id}
-							deleteEvent={deleteEvent}
-							handleSelectEvent={handleSelectEvent}
-							years={years}
-						/>
-					))}
-			</ul>
+			{years.length > 0 && (
+				<>
+					<ul className={styles.eventList} style={{ width: `${years[0].year}px` }}>
+						<Grid yearsNumber={years.length + 1} step={step} />
+						{timelineBounds &&
+							events
+								.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+								.map((e) => (
+									<Events
+										selectedEvent={selectedEvent}
+										event={e}
+										key={e.id}
+										deleteEvent={deleteEvent}
+										handleSelectEvent={handleSelectEvent}
+										years={years}
+									/>
+								))}
+					</ul>
 
-			{timelineBounds && <Baseline years={years} step={step} />}
+					{timelineBounds && <Baseline years={years} step={step} />}
+				</>
+			)}
 		</main>
 	)
 }
