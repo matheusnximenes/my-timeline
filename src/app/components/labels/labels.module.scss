@@ -20,5 +20,13 @@
 		&.inactive {
 			color: #ededed6f;
 		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+		}
 	}
 }

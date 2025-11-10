@@ -1,6 +1,8 @@
 'use client'
 
 import { db, ILabels } from '@/db/db.model'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
 import { useState } from 'react'
 import styles from '../event-details/event-form.module.scss'
 
@@ -58,8 +60,13 @@ const LabelsForm = ({ labels, onClose }: LabelsFormProps) => {
 			<ul>
 				{labels.map((label) => (
 					<li key={label.id}>
-						{label.name} - <button onClick={() => handleDeleteLabel(label.id!)}>Delete</button>{' '}
-						<button onClick={() => setFormData(label)}>Edit</button>
+						{label.name}
+						<button onClick={() => handleDeleteLabel(label.id!)}>
+							<DeleteForeverIcon fontSize='small' />
+						</button>
+						<button onClick={() => setFormData(label)}>
+							<ModeEditOutlineIcon fontSize='small' />
+						</button>
 					</li>
 				))}
 			</ul>

@@ -3,20 +3,20 @@ import styles from './labels.module.scss'
 
 interface LabelsProps {
 	labels?: ILabels[]
-	inactiveLabels: ILabels[]
-	handleInactiveLabels: (l: ILabels) => void
+	activeLabels: ILabels[]
+	handleActiveLabels: (l: ILabels) => void
 }
 
-const Labels = ({ labels, handleInactiveLabels, inactiveLabels }: LabelsProps) => {
+const Labels = ({ labels, handleActiveLabels, activeLabels }: LabelsProps) => {
 	return (
 		<ul className={styles.container}>
 			{labels?.map((l) => {
-				const isInactive = inactiveLabels.find((lb) => lb === l)
+				const isActive = activeLabels.length === 0 || activeLabels.find((lb) => lb === l)
 				return (
 					<li key={l.id}>
 						<button
-							className={isInactive ? styles.inactive : ''}
-							onClick={() => handleInactiveLabels(l)}
+							className={isActive ? '' : styles.inactive}
+							onClick={() => handleActiveLabels(l)}
 						>
 							{l.name}
 						</button>

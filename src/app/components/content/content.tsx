@@ -29,11 +29,14 @@ const initialFormData = {
 	mainImgUrl: '',
 	mainLinkName: '',
 	mainLinkUrl: '',
+	mapName: '',
+	mapLinkUrl: '',
 	labels: [] as string[],
 	customBgColor: '',
 	customColor: '',
 	customLineColor: '',
-	customLineType: ''
+	customLineType: '',
+	notes: ''
 }
 
 const borderStyles = [
@@ -49,10 +52,10 @@ const borderStyles = [
 ]
 
 const Content = () => {
-	const step = 50
+	const step = 300
 	const [selectedEvent, setSelectedEvent] = useState<ITimelineEvent | null>(null)
 	const [shownManageLabels, setShownManageLabels] = useState(false)
-	const [inactiveLabels, setInactiveLabels] = useState<ILabels[]>([])
+	const [activeLabels, setActiveLabels] = useState<ILabels[]>([])
 	const allEvents = useLiveQuery(() => db.timeline.toArray())
 	const labels = useLiveQuery(() => db.labels.toArray())
 
@@ -60,13 +63,15 @@ const Content = () => {
 		return null
 	}
 
-	const events = allEvents.filter((event) =>
-		inactiveLabels?.every((l) => event.labels?.includes(l.name))
-	)
+	const events =
+		activeLabels.length > 0
+			? allEvents.filter((e) =>
+					e.labels?.find((l) => activeLabels.map((l) => l.name).some((s) => s === l))
+			  )
+			: allEvents
 
 	const deleteEvent = async (id: number) => {
 		if (confirm('Are you sure you want to delete this event?')) {
-			console.log('deleteEvent', id)
 			await db.timeline.delete(id)
 			setSelectedEvent(null)
 		}
@@ -92,11 +97,13 @@ const Content = () => {
 		setSelectedEvent({ ...selectedEvent, labels: values } as ITimelineEvent)
 	}
 
-	const handleInactiveLabels = (label: ILabels) => {
-		setInactiveLabels((prev) => {
-			const exists = prev.some((l) => l.id === label.id)
-			return exists ? prev.filter((l) => l.id !== label.id) : [...prev, label]
-		})
+	const handleActiveLabels = (label: ILabels) => {
+		const isActive = activeLabels.some((l) => l.id === label.id)
+		if (isActive) {
+			setActiveLabels(activeLabels.filter((l) => l.id !== label.id))
+		} else {
+			setActiveLabels([...activeLabels, label])
+		}
 	}
 
 	const onClear = () => {
@@ -141,7 +148,7 @@ const Content = () => {
 		: []
 
 	return (
-		<main className={styles.main}>
+		<>
 			<header className={styles.header}>
 				<h1>My Timeline</h1>
 				<button
@@ -162,65 +169,67 @@ const Content = () => {
 					Create
 				</button>
 			</header>
-			<Labels
-				labels={labels}
-				inactiveLabels={inactiveLabels}
-				handleInactiveLabels={handleInactiveLabels}
-			/>
-			{selectedEvent && (
-				<div className={styles.container}>
-					<button className={styles.closeButton} onClick={() => setSelectedEvent(null)}>
-						X
-					</button>
-					<div className={styles.formContainer}>
-						<EventForm
-							labelsList={labels}
-							activeEvent={selectedEvent}
-							onChange={handleInputChange}
-							onSelect={handleMultipleSelectChange}
-							onCheck={handleCheckChange}
-							onClear={onClear}
-							onClose={onClose}
-							onSave={onSave}
-							deleteEvent={deleteEvent}
-						/>
+			<main className={styles.main}>
+				<Labels
+					labels={labels}
+					activeLabels={activeLabels}
+					handleActiveLabels={handleActiveLabels}
+				/>
+				{selectedEvent && (
+					<div className={styles.container}>
+						<button className={styles.closeButton} onClick={() => setSelectedEvent(null)}>
+							X
+						</button>
+						<div className={styles.formContainer}>
+							<EventForm
+								labelsList={labels}
+								activeEvent={selectedEvent}
+								onChange={handleInputChange}
+								onSelect={handleMultipleSelectChange}
+								onCheck={handleCheckChange}
+								onClear={onClear}
+								onClose={onClose}
+								onSave={onSave}
+								deleteEvent={deleteEvent}
+							/>
+						</div>
 					</div>
-				</div>
-			)}
-			{shownManageLabels && labels && (
-				<div className={styles.container}>
-					<button className={styles.closeButton} onClick={() => setShownManageLabels(false)}>
-						X
-					</button>
-					<div className={styles.formContainer}>
-						<LabelsForm labels={labels} onClose={() => setShownManageLabels(false)} />
+				)}
+				{shownManageLabels && labels && (
+					<div className={styles.container}>
+						<button className={styles.closeButton} onClick={() => setShownManageLabels(false)}>
+							X
+						</button>
+						<div className={styles.formContainer}>
+							<LabelsForm labels={labels} onClose={() => setShownManageLabels(false)} />
+						</div>
 					</div>
-				</div>
-			)}
+				)}
 
-			{years.length > 0 && (
-				<>
-					<ul className={styles.eventList} style={{ width: `${years[0].year}px` }}>
-						<Grid yearsNumber={years.length + 1} step={step} />
-						{timelineBounds &&
-							events
-								.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-								.map((e) => (
-									<Events
-										selectedEvent={selectedEvent}
-										event={e}
-										key={e.id}
-										deleteEvent={deleteEvent}
-										handleSelectEvent={handleSelectEvent}
-										years={years}
-									/>
-								))}
-					</ul>
-
-					{timelineBounds && <Baseline years={years} step={step} />}
-				</>
-			)}
-		</main>
+				{years.length > 0 && (
+					<>
+						{timelineBounds && <Baseline years={years} step={step} />}
+						<ul className={styles.eventList} style={{ width: `${years[0].year}px` }}>
+							<Grid yearsNumber={years.length} step={step} />
+							{timelineBounds &&
+								events
+									.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+									.map((e) => (
+										<Events
+											selectedEvent={selectedEvent}
+											event={e}
+											key={e.id}
+											deleteEvent={deleteEvent}
+											handleSelectEvent={handleSelectEvent}
+											years={years}
+										/>
+									))}
+						</ul>
+						{timelineBounds && <Baseline years={years} step={step} />}
+					</>
+				)}
+			</main>
+		</>
 	)
 }
 

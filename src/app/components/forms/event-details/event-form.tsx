@@ -1,9 +1,11 @@
 'use client'
 
 import { Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
+import 'quill/dist/quill.snow.css'
+import { useEffect } from 'react'
+import { useQuill } from 'react-quilljs'
 import styles from './event-form.module.scss'
 import { handleFormValidation } from './utils'
-
 interface IFormProps {
 	activeEvent: ITimelineEvent | null
 	labelsList: ILabels[] | undefined
@@ -59,8 +61,19 @@ const EventForm = ({
 		customBgColor,
 		customColor,
 		customLineColor,
-		customLineType
+		customLineType,
+		mapName,
+		mapLinkUrl
 	} = activeEvent || {}
+
+	// Use a ref to access the quill instance directly
+	const { quill, quillRef } = useQuill()
+
+	useEffect(() => {
+		if (quill) {
+			// quill.clipboard.dangerouslyPasteHTML('<h1>React Hook for Quill!</h1>')
+		}
+	}, [quill])
 
 	return (
 		<div className={styles.formContainer}>
@@ -199,6 +212,22 @@ const EventForm = ({
 					</label>
 				</div>
 				<div className={styles.row}>
+					<label htmlFor='mapName'>
+						Map Name
+						<input type='text' id='mapName' name='mapName' value={mapName} onChange={onChange} />
+					</label>
+					<label htmlFor='mapLinkUrl'>
+						Map Link URL
+						<input
+							type='text'
+							id='mapLinkUrl'
+							name='mapLinkUrl'
+							value={mapLinkUrl}
+							onChange={onChange}
+						/>
+					</label>
+				</div>
+				<div className={styles.row}>
 					<label htmlFor='labels'>
 						Labels
 						<select multiple id='labels' name='labels' value={labels ?? []} onChange={onSelect}>
@@ -210,6 +239,14 @@ const EventForm = ({
 						</select>
 					</label>
 				</div>
+				{/* <div className={styles.row}>
+					<label>
+						Notes
+						<div style={{ width: '100%', height: 300 }}>
+							<div ref={quillRef} />
+						</div>
+					</label>
+				</div> */}
 				<div className={styles.row}>
 					<label htmlFor='customBgColor'>
 						Background color
