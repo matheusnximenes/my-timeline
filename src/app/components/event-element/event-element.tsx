@@ -52,7 +52,7 @@ const Events = ({ event, handleSelectEvent, years, selectedEvent }: EventsProps)
 				className={`${styles.button} ${selectedEvent && isInactive ? styles.inactive : ''}`}
 			>
 				<div className={styles.header} style={customColor ? { color: customColor } : {}}>
-					<div className={styles.title}>
+					<div className={`${styles.title} ${event.isLandmark ? styles.landmark : ''}`}>
 						{event.mainImgUrl && (
 							<div className={styles.mainImage}>
 								<img src={event.mainImgUrl} alt={event.title} />

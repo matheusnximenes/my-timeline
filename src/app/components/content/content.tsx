@@ -52,7 +52,7 @@ const borderStyles = [
 ]
 
 const Content = () => {
-	const step = 50
+	const [step, setStep] = useState(50)
 	const [selectedEvent, setSelectedEvent] = useState<ITimelineEvent | null>(null)
 	const [shownManageLabels, setShownManageLabels] = useState(false)
 	const [activeLabels, setActiveLabels] = useState<ILabels[]>([])
@@ -151,6 +151,14 @@ const Content = () => {
 		<>
 			<header className={styles.header}>
 				<h1>My Timeline</h1>
+				<label className={styles.stepSelect}>
+					<select aria-label='Step' value={step} onChange={(e) => setStep(Number(e.target.value))}>
+						<option value={50}>Step 50</option>
+						<option value={100}>Step 100</option>
+						<option value={200}>Step 200</option>
+						<option value={500}>Step 500</option>
+					</select>
+				</label>
 				<button
 					className={styles.manageButton}
 					onClick={() => {
@@ -167,7 +175,7 @@ const Content = () => {
 						setSelectedEvent({ ...initialFormData, order: possibleNextOrder } as ITimelineEvent)
 					}}
 				>
-					Create
+					New Event
 				</button>
 			</header>
 			<main className={styles.main}>

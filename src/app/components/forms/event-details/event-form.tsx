@@ -81,13 +81,13 @@ const EventForm = ({
 		<div className={styles.formContainer}>
 			<h2>Event</h2>
 			<form onSubmit={onSave}>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='title'>
 						Title
 						<input type='text' id='title' name='title' value={title} onChange={onChange} />
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='description'>
 						Description
 						<input
@@ -99,7 +99,7 @@ const EventForm = ({
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='isLandMark'>
 						Is Landmark
 						<input
@@ -111,7 +111,7 @@ const EventForm = ({
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='mainImgName'>
 						Main Image Name
 						<input
@@ -133,13 +133,13 @@ const EventForm = ({
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='order'>
 						Order
 						<input type='number' id='order' name='order' value={order} onChange={onChange} />
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='startEra'>
 						Start era
 						<select id='startEra' name='startEra' value={startEra ?? ''} onChange={onChange}>
@@ -165,7 +165,7 @@ const EventForm = ({
 						</select>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='endEra'>
 						End era
 						<select id='endEra' name='endEra' value={endEra ?? ''} onChange={onChange}>
@@ -191,7 +191,7 @@ const EventForm = ({
 						</select>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='mainLinkName'>
 						Main Link Name
 						<input
@@ -213,7 +213,7 @@ const EventForm = ({
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='mapName'>
 						Map Name
 						<input type='text' id='mapName' name='mapName' value={mapName} onChange={onChange} />
@@ -229,7 +229,7 @@ const EventForm = ({
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='labels'>
 						Labels
 						<select multiple id='labels' name='labels' value={labels ?? []} onChange={onSelect}>
@@ -241,7 +241,7 @@ const EventForm = ({
 						</select>
 					</label>
 				</div>
-				{/* <div className={styles.row}>
+				{/* <div className='row'>
 					<label>
 						Notes
 						<div style={{ width: '100%', height: 300 }}>
@@ -249,7 +249,7 @@ const EventForm = ({
 						</div>
 					</label>
 				</div> */}
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='customBgColor'>
 						Background color
 						<input
@@ -272,7 +272,7 @@ const EventForm = ({
 					</label>
 				</div>
 				{isLandmark && (
-					<div className={styles.row}>
+					<div className='row'>
 						<label htmlFor='customLineColor'>
 							Outline Color
 							<input
@@ -300,7 +300,7 @@ const EventForm = ({
 						</label>
 					</div>
 				)}
-				<div className={styles.row}>
+				<div className='row'>
 					<button type='button' onClick={onClear}>
 						Clear
 					</button>

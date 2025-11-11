@@ -52,6 +52,10 @@ li.event {
 
 		.title {
 			position: relative;
+
+			&.landmark {
+				padding-left: 10px;
+			}
 		}
 
 		a {

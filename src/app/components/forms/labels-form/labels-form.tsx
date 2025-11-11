@@ -71,13 +71,13 @@ const LabelsForm = ({ labels, onClose }: LabelsFormProps) => {
 				))}
 			</ul>
 			<form onSubmit={handleLabelSubmit}>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='name'>
 						{formData.id ? 'Edit label:' : 'New label:'}
 						<input type='text' name='name' id='name' value={name} onChange={handleInputChange} />
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<label htmlFor='color'>
 						label color:
 						<input
@@ -89,7 +89,7 @@ const LabelsForm = ({ labels, onClose }: LabelsFormProps) => {
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
+				<div className='row'>
 					<button type='button' onClick={clearForm}>
 						clear
 					</button>
