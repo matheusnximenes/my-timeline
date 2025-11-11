@@ -75,6 +75,8 @@ const EventForm = ({
 		}
 	}, [quill])
 
+	console.log()
+
 	return (
 		<div className={styles.formContainer}>
 			<h2>Event</h2>
@@ -269,38 +271,40 @@ const EventForm = ({
 						/>
 					</label>
 				</div>
-				<div className={styles.row}>
-					<label htmlFor='customLineColor'>
-						Outline Color
-						<input
-							type='color'
-							id='customLineColor'
-							name='customLineColor'
-							value={customLineColor}
-							onChange={onChange}
-						/>
-					</label>
-					<label htmlFor='customLineType'>
-						Line Type
-						<select
-							id='customLineType'
-							name='customLineType'
-							value={customLineType}
-							onChange={onChange}
-						>
-							{borderStyles.map((style) => (
-								<option key={style} value={style}>
-									{style.charAt(0).toUpperCase() + style.slice(1)}
-								</option>
-							))}
-						</select>
-					</label>
-				</div>
+				{isLandmark && (
+					<div className={styles.row}>
+						<label htmlFor='customLineColor'>
+							Outline Color
+							<input
+								type='color'
+								id='customLineColor'
+								name='customLineColor'
+								value={customLineColor}
+								onChange={onChange}
+							/>
+						</label>
+						<label htmlFor='customLineType'>
+							Line Type
+							<select
+								id='customLineType'
+								name='customLineType'
+								value={customLineType}
+								onChange={onChange}
+							>
+								{borderStyles.map((style) => (
+									<option key={style} value={style}>
+										{style.charAt(0).toUpperCase() + style.slice(1)}
+									</option>
+								))}
+							</select>
+						</label>
+					</div>
+				)}
 				<div className={styles.row}>
 					<button type='button' onClick={onClear}>
 						Clear
 					</button>
-					<button type='submit' disabled={!handleFormValidation(activeEvent)}>
+					<button type='submit' disabled={handleFormValidation(activeEvent)}>
 						Save
 					</button>
 					{id && <button onClick={() => deleteEvent(id)}>Delete</button>}

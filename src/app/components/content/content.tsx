@@ -52,7 +52,7 @@ const borderStyles = [
 ]
 
 const Content = () => {
-	const step = 300
+	const step = 50
 	const [selectedEvent, setSelectedEvent] = useState<ITimelineEvent | null>(null)
 	const [shownManageLabels, setShownManageLabels] = useState(false)
 	const [activeLabels, setActiveLabels] = useState<ILabels[]>([])
@@ -163,7 +163,8 @@ const Content = () => {
 				<button
 					onClick={() => {
 						setShownManageLabels(false)
-						setSelectedEvent(initialFormData as ITimelineEvent)
+						const possibleNextOrder = Math.max(...events.map((e) => e.order)) + 1
+						setSelectedEvent({ ...initialFormData, order: possibleNextOrder } as ITimelineEvent)
 					}}
 				>
 					Create
