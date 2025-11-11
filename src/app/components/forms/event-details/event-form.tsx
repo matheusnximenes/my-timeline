@@ -1,9 +1,6 @@
 'use client'
 
 import { Era, ILabels, ITimelineEvent, Type } from '@/db/db.model'
-import 'quill/dist/quill.snow.css'
-import { useEffect } from 'react'
-import { useQuill } from 'react-quilljs'
 import styles from './event-form.module.scss'
 import { handleFormValidation } from './utils'
 interface IFormProps {
@@ -15,7 +12,7 @@ interface IFormProps {
 	onClear: () => void
 	onSave: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
 	onClose: () => void
-	deleteEvent: (e: number) => void
+	deleteEvent: () => void
 }
 
 const borderStyles = [
@@ -31,7 +28,6 @@ const borderStyles = [
 ]
 
 const EventForm = ({
-	onClose,
 	activeEvent,
 	labelsList,
 	onChange,
@@ -65,17 +61,6 @@ const EventForm = ({
 		mapName,
 		mapLinkUrl
 	} = activeEvent || {}
-
-	// Use a ref to access the quill instance directly
-	const { quill, quillRef } = useQuill()
-
-	useEffect(() => {
-		if (quill) {
-			// quill.clipboard.dangerouslyPasteHTML('<h1>React Hook for Quill!</h1>')
-		}
-	}, [quill])
-
-	console.log()
 
 	return (
 		<div className={styles.formContainer}>
@@ -241,14 +226,6 @@ const EventForm = ({
 						</select>
 					</label>
 				</div>
-				{/* <div className='row'>
-					<label>
-						Notes
-						<div style={{ width: '100%', height: 300 }}>
-							<div ref={quillRef} />
-						</div>
-					</label>
-				</div> */}
 				<div className='row'>
 					<label htmlFor='customBgColor'>
 						Background color
@@ -307,7 +284,7 @@ const EventForm = ({
 					<button type='submit' disabled={handleFormValidation(activeEvent)}>
 						Save
 					</button>
-					{id && <button onClick={() => deleteEvent(id)}>Delete</button>}
+					{id && <button onClick={deleteEvent}>Delete</button>}
 				</div>
 			</form>
 		</div>

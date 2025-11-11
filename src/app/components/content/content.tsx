@@ -70,10 +70,23 @@ const Content = () => {
 			  )
 			: allEvents
 
-	const deleteEvent = async (id: number) => {
-		if (confirm('Are you sure you want to delete this event?')) {
-			await db.timeline.delete(id)
-			setSelectedEvent(null)
+	const deleteEvent = async (event: ITimelineEvent) => {
+		console.log(typeof event.id, event.id)
+		if (confirm(`Are you sure you want to delete ${event.title}?`)) {
+			try {
+				if (event.id) {
+					await db.timeline
+						.where('id')
+						.equals(event.id)
+						.delete()
+						.then(function (id) {
+							console.log('Deleted ' + id + ' objects')
+						})
+					await setSelectedEvent(null)
+				}
+			} catch (e) {
+				console.error(`Error deleting friend with ID ${event.id}:`, e)
+			}
 		}
 	}
 
@@ -199,7 +212,7 @@ const Content = () => {
 								onClear={onClear}
 								onClose={onClose}
 								onSave={onSave}
-								deleteEvent={deleteEvent}
+								deleteEvent={() => deleteEvent(selectedEvent)}
 							/>
 						</div>
 					</div>
@@ -216,7 +229,7 @@ const Content = () => {
 				)}
 
 				{years.length > 0 && (
-					<>
+					<div className={styles.eventWrapper}>
 						{timelineBounds && <Baseline years={years} step={step} />}
 						<ul className={styles.eventList} style={{ width: `${years[0].year}px` }}>
 							<Grid yearsNumber={years.length} step={step} />
@@ -228,14 +241,14 @@ const Content = () => {
 											selectedEvent={selectedEvent}
 											event={e}
 											key={e.id}
-											deleteEvent={deleteEvent}
+											deleteEvent={() => deleteEvent(e)}
 											handleSelectEvent={handleSelectEvent}
 											years={years}
 										/>
 									))}
 						</ul>
 						{timelineBounds && <Baseline years={years} step={step} />}
-					</>
+					</div>
 				)}
 			</main>
 		</>
